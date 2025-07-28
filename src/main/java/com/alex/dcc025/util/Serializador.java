@@ -1,16 +1,16 @@
 package com.alex.dcc025.util;
 
-import java.io.Reader;
-import java.io.Writer;
-import java.lang.reflect.Type;
-import java.awt.Frame;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.alex.dcc025.franquia.Franquia;
+import com.alex.dcc025.usuario.Gerente;
 import com.alex.dcc025.usuario.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,6 +19,8 @@ import com.google.gson.reflect.TypeToken;
 public class Serializador {
 
     private static final String PATH_TO_USUARIOS = "usuarios.json";
+    private static final String PATH_TO_FRANQUIAS = "franquias.json";
+    private static final String PATH_TO_GERENTES = "franquias.json";
 
     public static final Gson gson;
 
@@ -29,8 +31,16 @@ public class Serializador {
         gson = builder.create();
     }
 
-    public static void saveObject(Object object) {
-        System.out.println(gson.toJson(object));
+    public static void saveFranquias(List<Franquia> franquias) {
+                    
+        Type tipoLista = new TypeToken<List<Franquia>>(){}.getType();
+
+        String json = gson.toJson(franquias, tipoLista);
+
+        try (Writer writer = new FileWriter(PATH_TO_FRANQUIAS)) {
+            writer.write(json);
+        } catch (IOException e) {
+        }
     }
 
     public static void saveUsuarios(List<Usuario> usuarios) {
@@ -42,7 +52,6 @@ public class Serializador {
         try (Writer writer = new FileWriter(PATH_TO_USUARIOS)) {
             writer.write(json);
         } catch (IOException e) {
-            return;
         }
     }
 
@@ -66,4 +75,51 @@ public class Serializador {
 
         return usuarios;
     }
+
+    public static List<Franquia> loadFranquias() {
+
+        List<Franquia> franquias = new ArrayList<>();
+
+        try (Reader reader = new FileReader(PATH_TO_FRANQUIAS)) {
+            
+            Type tipoLista = new TypeToken<List<Franquia>>(){}.getType();
+
+            franquias = gson.fromJson(reader, tipoLista);
+
+            if (franquias == null) {
+                return new ArrayList<>();
+            }
+
+        } catch (IOException e) {
+            return new ArrayList<>();
+        }
+
+        return franquias;
+    }
+
+    public static List<Gerente> loadGerentes() {
+
+        List<Usuario> usuarios = new ArrayList<>();
+        List<Gerente> gerentes = new ArrayList<>();
+
+        try (Reader reader = new FileReader(PATH_TO_GERENTES)) {
+            
+            Type tipoLista = new TypeToken<List<Gerente>>(){}.getType();
+
+            usuarios = gson.fromJson(reader, tipoLista);
+
+        } catch (IOException e) {
+            return new ArrayList<>();
+        }
+
+        if (usuarios == null) return gerentes;
+        
+        gerentes = usuarios.stream()
+        .filter(usuario -> usuario.getTipo() == 1)
+        .map(usuario -> (Gerente) usuario)
+        .toList();
+
+        return gerentes;
+    }
+
 }

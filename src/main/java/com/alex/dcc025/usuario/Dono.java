@@ -1,18 +1,18 @@
 package com.alex.dcc025.usuario;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.alex.dcc025.franquia.Franquia;
+import com.alex.dcc025.util.ID;
+import com.alex.dcc025.util.Serializador;
 
 public class Dono extends Usuario {
-    private List<Franquia> franquias;
-    private List<Gerente> gerentes;
+    private transient List<Franquia> franquias;
+    private transient List<Gerente> gerentes;
 
-    public Dono(int id, String nome, String cpf, String email, String senha) {
-        super(id, 0,nome, cpf, email, senha);
-        this.franquias = new ArrayList<>();
-        this.gerentes = new ArrayList<>();
+    public Dono(String nome, String cpf, String email, String senha) {
+        super(ID.getUUID(), nome, cpf, email, senha);
+        loadPropriedades();
     }
 
     public void cadastrarFranquia(String nome, String endereco, Gerente gerente) {
@@ -30,12 +30,17 @@ public class Dono extends Usuario {
         }
     }
 
-    public void cadastrarGerente(Gerente gerente) {
-        gerentes.add(gerente);
+    public void cadastrarGerente(String nome, String cpf, String email, String senha) {
+        gerentes.add(new Gerente(nome, cpf, email, senha));
     }
 
     public void removerGerente(Gerente gerente) {
         gerentes.remove(gerente);
+    }
+
+    public void loadPropriedades() {
+        this.franquias = Serializador.loadFranquias();
+        this.gerentes = Serializador.loadGerentes();
     }
 
     public void consultarRankingVendedores(Franquia franquia) {
@@ -49,4 +54,14 @@ public class Dono extends Usuario {
         return this.gerentes;
     }
     
+    @Override
+    public int getTipo() {
+        return 0;
+    }
+
+    @Override
+    public void savePropriedades() {
+        Serializador.saveFranquias(franquias);
+    }
+
 }

@@ -9,12 +9,12 @@ import com.alex.dcc025.usuario.Gerente;
 import com.alex.dcc025.usuario.Vendedor;
 
 public class Franquia {
-    private String nome;
-    private String endereco;
-    private Gerente gerente;
-    private List<Vendedor> vendedores;
-    private List<Pedido> pedidos;
-    private List<Produto> estoque;
+    private final String nome;
+    private final String endereco;
+    private final Gerente gerente;
+    private final List<Vendedor> vendedores;
+    private final List<Pedido> pedidos;
+    private final List<Produto> estoque;
 
     public Franquia(String nome, String endereco, Gerente gerente) {
         this.nome = nome;

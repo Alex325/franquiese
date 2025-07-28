@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alex.dcc025.franquia.Pedido;
+import com.alex.dcc025.util.ID;
 
 public class Vendedor extends Usuario {
     private Gerente gerente;
-    private List<Pedido> pedidos;
+    private transient List<Pedido> pedidos;
 
-    public Vendedor(int id,String nome, String cpf, String email, String senha) {
-        super(id, 2, nome, cpf, email, senha);
+    public Vendedor(String nome, String cpf, String email, String senha) {
+        super(ID.getUUID(), nome, cpf, email, senha);
         this.pedidos = new ArrayList<>();
     }
 
@@ -29,6 +30,17 @@ public class Vendedor extends Usuario {
 
     public void solicitarAlteracaoPedido(Pedido pedido) {
         // gerente.analisarSolicitacaoAlteracao(pedido);
+    }
+
+    @Override
+    public int getTipo() {
+        return 2;
+    }
+
+    @Override
+    public void savePropriedades() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'savePropriedades'");
     }
 
 }
