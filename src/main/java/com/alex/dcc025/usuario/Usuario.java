@@ -1,5 +1,7 @@
 package com.alex.dcc025.usuario;
 
+import com.alex.dcc025.util.ID;
+
 public abstract class Usuario {
     
     protected final String id;
@@ -8,6 +10,14 @@ public abstract class Usuario {
     protected final String email;
     protected final String senha;
     
+    public Usuario(String nome, String cpf, String email, String senha) {
+        this.id = ID.getUUID();
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.senha = senha;
+    }
+
     public Usuario(String id, String nome, String cpf, String email, String senha) {
         this.id = id;
         this.nome = nome;
@@ -16,8 +26,20 @@ public abstract class Usuario {
         this.senha = senha;
     }
 
-    public String getNome() {
+    public final String getId() {
+        return this.id;
+    }
+    public final String getNome() {
         return this.nome;
+    }
+    public final String getCpf() {
+        return this.cpf;
+    }
+    public final String getEmail() {
+        return this.email;
+    }
+    public final String getSenha() {
+        return this.senha;
     }
 
     public boolean validar(String email, String senha) {
@@ -26,8 +48,6 @@ public abstract class Usuario {
     }
 
     public abstract int getTipo();
-
-    public abstract void savePropriedades();
 
     
 }

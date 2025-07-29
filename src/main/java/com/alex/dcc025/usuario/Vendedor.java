@@ -3,25 +3,28 @@ package com.alex.dcc025.usuario;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alex.dcc025.franquia.Franquia;
 import com.alex.dcc025.franquia.Pedido;
-import com.alex.dcc025.util.ID;
 
 public class Vendedor extends Usuario {
-    private Gerente gerente;
-    private transient List<Pedido> pedidos;
+    private final Franquia franquia;
+    private final List<Pedido> pedidos;
 
-    public Vendedor(String nome, String cpf, String email, String senha) {
-        super(ID.getUUID(), nome, cpf, email, senha);
+    public Vendedor(String nome, String cpf, String email, String senha, Franquia franquia) {
+        super(nome, cpf, email, senha);
+        this.franquia = franquia;
         this.pedidos = new ArrayList<>();
     }
 
-    public void setGerente(Gerente gerente) {
-        this.gerente = gerente;
+    public Vendedor(String id, String nome, String cpf, String email, String senha, Franquia franquia, List<Pedido> pedidos) {
+        super(id, nome, cpf, email, senha);
+        this.franquia = franquia;
+        this.pedidos = pedidos;
     }
 
     public void cadastrarPedido(Pedido pedido) {
         pedidos.add(pedido);
-        gerente.getFranquia().adicionarPedido(pedido);
+        franquia.adicionarPedido(pedido);
     }
 
     public List<Pedido> visualizarPedidos() {
@@ -29,18 +32,17 @@ public class Vendedor extends Usuario {
     }
 
     public void solicitarAlteracaoPedido(Pedido pedido) {
-        // gerente.analisarSolicitacaoAlteracao(pedido);
+        // franquia.analisarSolicitacaoAlteracao(pedido);
     }
 
     @Override
-    public int getTipo() {
+    public final int getTipo() {
         return 2;
     }
 
-    @Override
-    public void savePropriedades() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'savePropriedades'");
+
+    public final Franquia getFranquia() {
+        return this.franquia;
     }
 
 }

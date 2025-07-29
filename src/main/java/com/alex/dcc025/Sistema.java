@@ -2,6 +2,7 @@ package com.alex.dcc025;
 
 import java.util.List;
 
+import com.alex.dcc025.usuario.Dono;
 import com.alex.dcc025.usuario.Usuario;
 import com.alex.dcc025.util.Serializador;
 
@@ -15,7 +16,15 @@ public class Sistema {
     }
 
     public void onExit() {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getTipo() == 0) {
+                Dono dono = (Dono) usuario;
+                dono.savePropriedades();
+                break;
+            }
+        }
         updateUsuarios();
+
     }
 
     public Usuario login(String email, String senha) {
@@ -30,7 +39,6 @@ public class Sistema {
     
     public void cadastrarUsuario(Usuario usuario) {
         usuarios.add(usuario);
-        updateUsuarios();
     }
 
     private void updateUsuarios() {
@@ -38,7 +46,6 @@ public class Sistema {
     }
     
     private void loadUsuarios() {
-        
         usuarios = Serializador.loadUsuarios();
     }
 

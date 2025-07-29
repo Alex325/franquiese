@@ -2,7 +2,6 @@ package com.alex.dcc025;
 
 import com.alex.dcc025.gui.GUI;
 import com.alex.dcc025.usuario.Dono;
-import com.alex.dcc025.usuario.Gerente;
 
 public class Trabalho3DCC025 {
     public static void main(String[] args) {
@@ -16,6 +15,7 @@ public class Trabalho3DCC025 {
         dono.cadastrarFranquia("nome", "endereco", dono.getGerentes().get(0));
 
         sistema.cadastrarUsuario(dono);
+        sistema.cadastrarUsuario(dono.getGerente(0));
         
 
         new GUI(sistema);

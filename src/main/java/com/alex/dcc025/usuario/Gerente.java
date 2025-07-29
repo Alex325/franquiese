@@ -8,11 +8,14 @@ import com.alex.dcc025.util.ID;
 
 public class Gerente extends Usuario {
     private Franquia franquia;
-    private List<Vendedor> vendedores;
 
     public Gerente(String nome, String cpf, String email, String senha) {
-        super(ID.getUUID(), nome, cpf, email, senha);
-        this.vendedores = new ArrayList<>();
+        super(nome, cpf, email, senha);
+    }
+
+    public Gerente(String id, String nome, String cpf, String email, String senha, Franquia franquia) {
+        super(nome, cpf, email, senha);
+        this.franquia = franquia;
     }
 
     public void setFranquia(Franquia franquia) {
@@ -24,12 +27,11 @@ public class Gerente extends Usuario {
     }
 
     public void cadastrarVendedor(Vendedor vendedor) {
-        vendedores.add(vendedor);
-        vendedor.setGerente(this);
+        franquia.cadastrarVendedor(vendedor);
     }
 
     public void removerVendedor(Vendedor vendedor) {
-        vendedores.remove(vendedor);
+        franquia.removerVendedor(vendedor);
     }
 
     public void editarVendedor(Vendedor vendedor, String novoNome) {
@@ -53,9 +55,4 @@ public class Gerente extends Usuario {
         return 1;
     }
 
-    @Override
-    public void savePropriedades() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'savePropriedades'");
-    }
 }

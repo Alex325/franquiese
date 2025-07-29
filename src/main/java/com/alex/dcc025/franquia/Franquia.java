@@ -7,8 +7,11 @@ import java.util.Map;
 
 import com.alex.dcc025.usuario.Gerente;
 import com.alex.dcc025.usuario.Vendedor;
+import com.alex.dcc025.util.ID;
 
 public class Franquia {
+
+    private final String id;
     private final String nome;
     private final String endereco;
     private final Gerente gerente;
@@ -17,6 +20,7 @@ public class Franquia {
     private final List<Produto> estoque;
 
     public Franquia(String nome, String endereco, Gerente gerente) {
+        this.id = ID.getUUID();
         this.nome = nome;
         this.endereco = endereco;
         this.gerente = gerente;
@@ -24,6 +28,17 @@ public class Franquia {
         this.pedidos = new ArrayList<>();
         this.estoque = new ArrayList<>();
         gerente.setFranquia(this);
+    }
+
+    // para desserialização
+    public Franquia(String id, String nome, String endereco, Gerente gerente, List<Vendedor> vendedores, List<Pedido> pedidos, List<Produto> estoque) {
+        this.id = id;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.gerente = gerente;
+        this.vendedores = vendedores;
+        this.pedidos = pedidos;
+        this.estoque = estoque;
     }
 
     public void adicionarPedido(Pedido pedido) {
@@ -49,6 +64,10 @@ public class Franquia {
         // Calcular receita, ticket médio, etc.
     }
 
+    public void cadastrarVendedor(Vendedor vendedor) {
+        vendedores.add(vendedor);
+    }
+
     public void mostrarRankingVendedores() {
         Map<Vendedor, Double> vendasPorVendedor = new HashMap<>();
         for (Pedido p : pedidos) {
@@ -65,4 +84,31 @@ public class Franquia {
     public void mostrarRelatorio() {
         // histórico de vendas, clientes mais recorrentes, etc.
     }
+
+    public String getId() {
+        return this.id;
+    }
+    public String getNome() {
+        return this.nome;
+    }
+    public String getEndereco() {
+        return this.endereco;
+    }
+    public Gerente getGerente() {
+        return this.gerente;
+    }
+    public List<Vendedor> getVendedores() {
+        return this.vendedores;
+    }
+    public List<Pedido> getPedidos() {
+        return this.pedidos;
+    }
+    public List<Produto> getEstoque() {
+        return this.estoque;
+    }
+
+    public void removerVendedor(Vendedor vendedor) {
+        vendedores.remove(vendedor);
+    }
+
 }

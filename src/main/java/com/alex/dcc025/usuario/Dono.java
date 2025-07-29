@@ -7,11 +7,16 @@ import com.alex.dcc025.util.ID;
 import com.alex.dcc025.util.Serializador;
 
 public class Dono extends Usuario {
-    private transient List<Franquia> franquias;
-    private transient List<Gerente> gerentes;
+    private List<Franquia> franquias;
+    private List<Gerente> gerentes;
 
     public Dono(String nome, String cpf, String email, String senha) {
-        super(ID.getUUID(), nome, cpf, email, senha);
+        super(nome, cpf, email, senha);
+        loadPropriedades();
+    }
+
+    public Dono(String id, String nome, String cpf, String email, String senha) {
+        super(id, nome, cpf, email, senha);
         loadPropriedades();
     }
 
@@ -38,6 +43,10 @@ public class Dono extends Usuario {
         gerentes.remove(gerente);
     }
 
+    public Gerente getGerente(int i) {
+        return gerentes.get(i);
+    }
+
     public void loadPropriedades() {
         this.franquias = Serializador.loadFranquias();
         this.gerentes = Serializador.loadGerentes();
@@ -59,7 +68,6 @@ public class Dono extends Usuario {
         return 0;
     }
 
-    @Override
     public void savePropriedades() {
         Serializador.saveFranquias(franquias);
     }

@@ -8,10 +8,13 @@ import java.io.Writer;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.alex.dcc025.franquia.Franquia;
 import com.alex.dcc025.usuario.Gerente;
 import com.alex.dcc025.usuario.Usuario;
+import com.alex.dcc025.usuario.Vendedor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -20,7 +23,7 @@ public class Serializador {
 
     private static final String PATH_TO_USUARIOS = "usuarios.json";
     private static final String PATH_TO_FRANQUIAS = "franquias.json";
-    private static final String PATH_TO_GERENTES = "franquias.json";
+
 
     public static final Gson gson;
 
@@ -99,27 +102,34 @@ public class Serializador {
 
     public static List<Gerente> loadGerentes() {
 
-        List<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = loadUsuarios();
         List<Gerente> gerentes = new ArrayList<>();
-
-        try (Reader reader = new FileReader(PATH_TO_GERENTES)) {
-            
-            Type tipoLista = new TypeToken<List<Gerente>>(){}.getType();
-
-            usuarios = gson.fromJson(reader, tipoLista);
-
-        } catch (IOException e) {
-            return new ArrayList<>();
-        }
 
         if (usuarios == null) return gerentes;
         
         gerentes = usuarios.stream()
         .filter(usuario -> usuario.getTipo() == 1)
         .map(usuario -> (Gerente) usuario)
-        .toList();
+        .collect(Collectors.toList());
+        
 
         return gerentes;
+    }
+
+    public static List<Vendedor> loadVendedores() {
+
+        List<Usuario> usuarios = loadUsuarios();
+        List<Vendedor> vendedores = new ArrayList<>();
+
+        if (usuarios == null) return vendedores;
+        
+        vendedores = usuarios.stream()
+        .filter(usuario -> usuario.getTipo() == 1)
+        .map(usuario -> (Vendedor) usuario)
+        .collect(Collectors.toList());
+        
+
+        return vendedores;
     }
 
 }
