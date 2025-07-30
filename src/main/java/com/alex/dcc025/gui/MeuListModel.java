@@ -1,0 +1,42 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.alex.dcc025.gui;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ListModel;
+import javax.swing.event.ListDataListener;
+
+public class MeuListModel<T> implements ListModel {
+    
+    private final List<T> data;
+    private final List<ListDataListener> listeners;
+
+    public MeuListModel(List<T> values) {
+        data = new ArrayList<>(values);
+        listeners = new ArrayList<>();
+    }
+    
+    @Override
+    public int getSize() {
+        return data.size();
+    }
+
+    @Override
+    public Object getElementAt(int index) {
+        return data.get(index);
+    }
+
+    @Override
+    public void addListDataListener(ListDataListener l) {
+        listeners.add(l);
+    }
+
+    @Override
+    public void removeListDataListener(ListDataListener l) {
+        listeners.remove(l);
+    }
+    
+}

@@ -51,6 +51,8 @@ public class FranquiaAdapter implements JsonSerializer<Franquia>, JsonDeserializ
 
         Map<String, Produto> produtos = Serializador.loadProdutos();
 
+        System.out.println(Serializador.usuarios);
+        
         Gerente gerente = Serializador.loadGerentes().stream().filter(g -> g.getId().equals(gerenteId)).toList().get(0);
         
         List<Vendedor> vendedores = Serializador.loadVendedores().stream().filter(v -> vendedoresIds.contains(v.getId())).collect(Collectors.toList());

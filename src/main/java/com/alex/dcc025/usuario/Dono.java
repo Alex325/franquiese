@@ -5,6 +5,7 @@ import java.util.List;
 import com.alex.dcc025.franquia.Franquia;
 import com.alex.dcc025.util.ID;
 import com.alex.dcc025.util.Serializador;
+import java.util.ArrayList;
 
 public class Dono extends Usuario {
     private List<Franquia> franquias;
@@ -12,7 +13,8 @@ public class Dono extends Usuario {
 
     public Dono(String nome, String cpf, String email, String senha) {
         super(nome, cpf, email, senha);
-        loadPropriedades();
+        franquias = new ArrayList<>();
+        gerentes = new ArrayList<>();
     }
 
     public Dono(String id, String nome, String cpf, String email, String senha) {

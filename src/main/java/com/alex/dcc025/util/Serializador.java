@@ -35,7 +35,8 @@ public class Serializador {
     private static final String PATH_TO_FRANQUIAS = PATH_PREFIX + "franquias.json";
     private static final String PATH_TO_PRODUTOS = PATH_PREFIX + "produtos.json";
 
-
+    public static final List<Usuario> usuarios;
+    
     public static final Gson gson;
 
     static {
@@ -57,6 +58,8 @@ public class Serializador {
         builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter());
         builder.registerTypeAdapter(ItemPedido.class, new ItemPedidoAdapter());
         gson = builder.create();
+        
+        usuarios = loadUsuarios();
     }
 
     public static void saveFranquias(List<Franquia> franquias) {
@@ -148,8 +151,7 @@ public class Serializador {
     }
 
     public static List<Gerente> loadGerentes() {
-
-        List<Usuario> usuarios = loadUsuarios();
+        
         List<Gerente> gerentes = new ArrayList<>();
 
         if (usuarios == null) return gerentes;
@@ -165,7 +167,6 @@ public class Serializador {
 
     public static List<Vendedor> loadVendedores() {
 
-        List<Usuario> usuarios = loadUsuarios();
         List<Vendedor> vendedores = new ArrayList<>();
 
         if (usuarios == null) return vendedores;
