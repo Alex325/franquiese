@@ -4,14 +4,22 @@ import com.alex.dcc025.util.ID;
 
 public class Produto {
 
-    private final String id;
-    private final String nome;
-    private final double preco;
-    private final String descricao;
+    private String id;
+    private String nome;
+    private double preco;
+    private String descricao;
     private int quantidade;
 
     public Produto(String nome, double preco, String descricao, int quantidade) {
         this.id = ID.getUUID();
+        this.nome = nome;
+        this.preco = preco;
+        this.descricao = descricao;
+        this.quantidade = quantidade;
+    }
+
+    public Produto(String id, String nome, double preco, String descricao, int quantidade) {
+        this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.descricao = descricao;

@@ -1,10 +1,15 @@
 package com.alex.dcc025.usuario;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alex.dcc025.franquia.FormaPagamento;
 import com.alex.dcc025.franquia.Franquia;
+import com.alex.dcc025.franquia.ItemPedido;
+import com.alex.dcc025.franquia.ModalidadeEntrega;
 import com.alex.dcc025.franquia.Pedido;
+import com.alex.dcc025.franquia.Produto;
 
 public class Vendedor extends Usuario {
     private final Franquia franquia;
@@ -22,12 +27,13 @@ public class Vendedor extends Usuario {
         this.pedidos = pedidos;
     }
 
-    public void cadastrarPedido(Pedido pedido) {
+    public void cadastrarPedido(String cliente, List<ItemPedido> itens, FormaPagamento formaPagamento, ModalidadeEntrega modalidadeEntrega) {
+        Pedido pedido = new Pedido(this, cliente, itens, formaPagamento, modalidadeEntrega);
         pedidos.add(pedido);
         franquia.adicionarPedido(pedido);
     }
 
-    public List<Pedido> visualizarPedidos() {
+    public List<Pedido> getPedidos() {
         return pedidos;
     }
 

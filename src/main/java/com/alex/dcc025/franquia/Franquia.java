@@ -81,6 +81,10 @@ public class Franquia {
             .forEach(entry -> System.out.println(entry.getKey().getNome() + ": R$ " + entry.getValue()));
     }
 
+    public void cadastrarProduto(Produto produto) {
+        estoque.add(produto);
+    }
+
     public void mostrarRelatorio() {
         // histórico de vendas, clientes mais recorrentes, etc.
     }

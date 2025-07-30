@@ -10,23 +10,33 @@ public class Pedido {
 
     private final String id;
     private final Vendedor vendedor;
-    private final String cliente;
-    private final String dataHora;
-    private final List<ItemPedido> itens;
-    private final String formaPagamento;
-    private final double valorTotal;
-    private final String modalidadeEntrega;
+    private String cliente;
+    private final LocalDateTime dataHora;
+    private List<ItemPedido> itens;
+    private FormaPagamento formaPagamento;
+    private ModalidadeEntrega modalidadeEntrega;
+    private double valorTotal;
 
-    public Pedido(Vendedor vendedor, String cliente, String dataHora,
-                  List<ItemPedido> itens, String formaPagamento, String modalidadeEntrega) {
+    public Pedido(Vendedor vendedor, String cliente, List<ItemPedido> itens, FormaPagamento formaPagamento, ModalidadeEntrega modalidadeEntrega) {
         this.id = ID.getUUID();
+        this.vendedor = vendedor;
+        this.cliente = cliente;
+        this.dataHora = LocalDateTime.now();
+        this.itens = itens;
+        this.formaPagamento = formaPagamento;
+        this.modalidadeEntrega = modalidadeEntrega;
+        this.valorTotal = calcularValorTotal();
+    }
+
+    public Pedido(String id, Vendedor vendedor, String cliente, LocalDateTime dataHora, List<ItemPedido> itens, FormaPagamento formaPagamento, ModalidadeEntrega modalidadeEntrega, double valorTotal) {
+        this.id = id;
         this.vendedor = vendedor;
         this.cliente = cliente;
         this.dataHora = dataHora;
         this.itens = itens;
         this.formaPagamento = formaPagamento;
         this.modalidadeEntrega = modalidadeEntrega;
-        this.valorTotal = calcularValorTotal();
+        this.valorTotal = valorTotal;
     }
 
     private double calcularValorTotal() {
@@ -49,5 +59,23 @@ public class Pedido {
     public double getValorTotal() {
         return valorTotal;
     }
+
+    public final String getCliente() {
+        return this.cliente;
+    }
+    public final LocalDateTime getDataHora() {
+        return this.dataHora;
+    }
+    public final List<ItemPedido> getItens() {
+        return this.itens;
+    }
+    public final FormaPagamento getFormaPagamento() {
+        return this.formaPagamento;
+    }
+    public final ModalidadeEntrega getModalidadeEntrega() {
+        return this.modalidadeEntrega;
+    }
+    
+
 }
 

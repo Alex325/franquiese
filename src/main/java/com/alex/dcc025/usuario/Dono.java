@@ -72,4 +72,8 @@ public class Dono extends Usuario {
         Serializador.saveFranquias(franquias);
     }
 
+    public Franquia getFranquia(int i) {
+        return this.franquias.get(0);
+    }
+
 }

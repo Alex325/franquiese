@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alex.dcc025.franquia.Franquia;
+import com.alex.dcc025.franquia.Produto;
 import com.alex.dcc025.util.ID;
 
 public class Gerente extends Usuario {
@@ -26,16 +27,28 @@ public class Gerente extends Usuario {
         return this.franquia;
     }
 
-    public void cadastrarVendedor(Vendedor vendedor) {
-        franquia.cadastrarVendedor(vendedor);
+    public void cadastrarVendedor(String nome, String cpf, String email, String senha, Franquia franquia) {
+        franquia.cadastrarVendedor(new Vendedor(nome, cpf, email, senha, franquia));
     }
 
     public void removerVendedor(Vendedor vendedor) {
         franquia.removerVendedor(vendedor);
     }
 
+    public List<Vendedor> getVendedores() {
+        return this.franquia.getVendedores();
+    }
+
+    public Vendedor getVendedor(int i) {
+        return this.franquia.getVendedores().get(i);
+    }
+
     public void editarVendedor(Vendedor vendedor, String novoNome) {
         // vendedor.setNome(novoNome);
+    }
+
+    public void cadastrarProduto(String nome, double preco, String descricao, int quantidade) {
+        this.franquia.cadastrarProduto(new Produto(nome, preco, descricao, quantidade));
     }
 
     public void controlarPedidos() {
