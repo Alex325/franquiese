@@ -1,6 +1,5 @@
 package com.alex.dcc025.util;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,8 +11,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collector;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.alex.dcc025.franquia.Franquia;
@@ -32,6 +33,7 @@ public class Serializador {
     private static final String PATH_PREFIX = "resources/";
     private static final String PATH_TO_USUARIOS = PATH_PREFIX + "usuarios.json";
     private static final String PATH_TO_FRANQUIAS = PATH_PREFIX + "franquias.json";
+    private static final String PATH_TO_PRODUTOS = PATH_PREFIX + "produtos.json";
 
 
     public static final Gson gson;
@@ -76,6 +78,28 @@ public class Serializador {
         String json = gson.toJson(usuarios, tipoLista);
 
         try (Writer writer = new FileWriter(PATH_TO_USUARIOS)) {
+            writer.write(json);
+        } catch (IOException e) {
+        }
+    }
+
+    public static void saveProdutos(List<Franquia> franquias) {
+        Type tipoMap = new TypeToken<Map<String, Produto>>(){}.getType();
+
+        List<Produto> produtosLista = franquias
+        .stream()
+        .map(Franquia::getEstoque)
+        .reduce(new ArrayList<>(), (identity, proximo) -> { identity.addAll(proximo); return identity; });
+
+        System.out.println(produtosLista);
+
+        Map<String, Produto> produtos = produtosLista.stream().collect(Collectors.toMap(Produto::getId, Function.identity()));
+
+
+
+        String json = gson.toJson(produtos, tipoMap);
+
+        try (Writer writer = new FileWriter(PATH_TO_PRODUTOS)) {
             writer.write(json);
         } catch (IOException e) {
         }
@@ -155,14 +179,26 @@ public class Serializador {
         return vendedores;
     }
 
-    public static List<Pedido> loadPedidos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadPedidos'");
+    public static Map<String, Produto> loadProdutos() {
+
+        Map<String, Produto> produtos = new HashMap<>();
+
+        try (Reader reader = new FileReader(PATH_TO_PRODUTOS)) {
+            
+            Type tipoMap = new TypeToken<Map<String, Produto>>(){}.getType();
+
+            produtos = gson.fromJson(reader, tipoMap);
+
+            if (produtos == null) {
+                return new HashMap<>();
+            }
+
+        } catch (IOException e) {
+            return new HashMap<>();
+        }
+
+        return produtos;
     }
 
-    public static List<Produto> loadEstoque() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadEstoque'");
-    }
 
 }

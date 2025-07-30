@@ -1,7 +1,6 @@
 package com.alex.dcc025.gui;
 
 import java.awt.Dimension;
-import java.awt.TextArea;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -72,8 +71,6 @@ public class GUI {
 
         janela.revalidate();
         janela.repaint();
-
-
     }
 
 }

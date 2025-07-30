@@ -1,9 +1,7 @@
 package com.alex.dcc025.util;
 
 import java.lang.reflect.Type;
-import java.time.LocalDateTime;
 
-import com.alex.dcc025.franquia.Franquia;
 import com.alex.dcc025.franquia.ItemPedido;
 import com.alex.dcc025.franquia.Produto;
 import com.google.gson.JsonDeserializationContext;
@@ -21,7 +19,6 @@ public class ItemPedidoAdapter implements JsonSerializer<ItemPedido>, JsonDeseri
 
         JsonObject obj = new JsonObject();
 
-        obj.addProperty("franquia", src.getFranquia().getId());
         obj.addProperty("produto", src.getProduto().getId());
         obj.addProperty("quantidade", src.getQuantidade());
 
@@ -33,17 +30,12 @@ public class ItemPedidoAdapter implements JsonSerializer<ItemPedido>, JsonDeseri
         
         JsonObject obj = json.getAsJsonObject();
 
-        String franquiaId = obj.get("franquia").getAsString();
         String produtoId = obj.get("produto").getAsString();
         int quantidade = obj.get("quantidade").getAsInt();
 
-        Franquia franquia = Serializador.loadFranquias().stream().filter(f -> f.getId().equals(franquiaId)).toList().get(0);
+        Produto produto = Serializador.loadProdutos().get(produtoId);
 
-
-        Produto produto = franquia.getEstoque().stream().filter(p -> p.getId().equals(produtoId)).toList().get(0);
-
-
-        return new ItemPedido(franquia, produto, quantidade);
+        return new ItemPedido(produto, quantidade);
 
 
     }
