@@ -10,6 +10,8 @@ public class ItemPedido {
         this.quantidade = quantidade;
     }
 
+    public ItemPedido() {}
+
     public Produto getProduto() {
         return this.produto;
     }

@@ -3,8 +3,6 @@ package com.alex.dcc025.usuario;
 import java.util.List;
 
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.util.ID;
-import com.alex.dcc025.util.Serializador;
 import java.util.ArrayList;
 
 public class Dono extends Usuario {
@@ -17,9 +15,7 @@ public class Dono extends Usuario {
         gerentes = new ArrayList<>();
     }
 
-    public Dono(String id, String nome, String cpf, String email, String senha) {
-        super(id, nome, cpf, email, senha);
-        loadPropriedades();
+    public Dono() {
     }
 
     public void cadastrarFranquia(String nome, String endereco, Gerente gerente) {
@@ -49,11 +45,6 @@ public class Dono extends Usuario {
         return gerentes.get(i);
     }
 
-    public void loadPropriedades() {
-        this.franquias = Serializador.loadFranquias();
-        this.gerentes = Serializador.loadGerentes();
-    }
-
     public void consultarRankingVendedores(Franquia franquia) {
         franquia.mostrarRankingVendedores();
     }
@@ -68,11 +59,6 @@ public class Dono extends Usuario {
     @Override
     public int getTipo() {
         return 0;
-    }
-
-    public void savePropriedades() {
-        Serializador.saveFranquias(franquias);
-        Serializador.saveProdutos(franquias);
     }
 
     public Franquia getFranquia(int i) {

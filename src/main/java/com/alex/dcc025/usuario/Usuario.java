@@ -4,11 +4,11 @@ import com.alex.dcc025.util.ID;
 
 public abstract class Usuario {
     
-    protected final String id;
-    protected final String nome;
-    protected final String cpf;
-    protected final String email;
-    protected final String senha;
+    protected String id;
+    protected String nome;
+    protected String cpf;
+    protected String email;
+    protected String senha;
     
     public Usuario(String nome, String cpf, String email, String senha) {
         this.id = ID.getUUID();
@@ -18,12 +18,8 @@ public abstract class Usuario {
         this.senha = senha;
     }
 
-    public Usuario(String id, String nome, String cpf, String email, String senha) {
-        this.id = id;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.senha = senha;
+    public Usuario() {
+
     }
 
     public final String getId() {
@@ -49,5 +45,12 @@ public abstract class Usuario {
 
     public abstract int getTipo();
 
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder(this.nome);
+        string.append(" - ");
+        string.append(this.email);
+        return string.toString();
+    }
     
 }

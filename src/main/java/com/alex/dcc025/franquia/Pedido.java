@@ -8,10 +8,10 @@ import com.alex.dcc025.util.ID;
 
 public class Pedido {
 
-    private final String id;
-    private final Vendedor vendedor;
+    private String id;
+    private Vendedor vendedor;
     private String cliente;
-    private final LocalDateTime dataHora;
+    private LocalDateTime dataHora;
     private List<ItemPedido> itens;
     private FormaPagamento formaPagamento;
     private ModalidadeEntrega modalidadeEntrega;
@@ -28,16 +28,7 @@ public class Pedido {
         this.valorTotal = calcularValorTotal();
     }
 
-    public Pedido(String id, Vendedor vendedor, String cliente, LocalDateTime dataHora, List<ItemPedido> itens, FormaPagamento formaPagamento, ModalidadeEntrega modalidadeEntrega, double valorTotal) {
-        this.id = id;
-        this.vendedor = vendedor;
-        this.cliente = cliente;
-        this.dataHora = dataHora;
-        this.itens = itens;
-        this.formaPagamento = formaPagamento;
-        this.modalidadeEntrega = modalidadeEntrega;
-        this.valorTotal = valorTotal;
-    }
+    public Pedido() {}
 
     private double calcularValorTotal() {
         double total = 0;

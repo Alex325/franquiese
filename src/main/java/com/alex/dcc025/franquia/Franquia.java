@@ -11,13 +11,13 @@ import com.alex.dcc025.util.ID;
 
 public class Franquia {
 
-    private final String id;
-    private final String nome;
-    private final String endereco;
-    private final Gerente gerente;
-    private final List<Vendedor> vendedores;
-    private final List<Pedido> pedidos;
-    private final List<Produto> estoque;
+    private String id;
+    private String nome;
+    private String endereco;
+    private Gerente gerente;
+    private List<Vendedor> vendedores;
+    private List<Pedido> pedidos;
+    private List<Produto> estoque;
 
     public Franquia(String nome, String endereco, Gerente gerente) {
         this.id = ID.getUUID();
@@ -31,15 +31,7 @@ public class Franquia {
     }
 
     // para desserialização
-    public Franquia(String id, String nome, String endereco, Gerente gerente, List<Vendedor> vendedores, List<Pedido> pedidos, List<Produto> estoque) {
-        this.id = id;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.gerente = gerente;
-        this.vendedores = vendedores;
-        this.pedidos = pedidos;
-        this.estoque = estoque;
-    }
+    public Franquia() {}
 
     public void adicionarPedido(Pedido pedido) {
         pedidos.add(pedido);
@@ -113,6 +105,14 @@ public class Franquia {
 
     public void removerVendedor(Vendedor vendedor) {
         vendedores.remove(vendedor);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder(this.nome);
+        string.append(" - ");
+        string.append(this.gerente != null ? this.gerente.getNome() : "sem gerente");
+        return string.toString();
     }
 
 }

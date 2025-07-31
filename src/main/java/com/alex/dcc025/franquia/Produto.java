@@ -18,13 +18,7 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public Produto(String id, String nome, double preco, String descricao, int quantidade) {
-        this.id = id;
-        this.nome = nome;
-        this.preco = preco;
-        this.descricao = descricao;
-        this.quantidade = quantidade;
-    }
+    public Produto() {}
 
     public boolean isEstoqueBaixo() {
         return quantidade < 5;

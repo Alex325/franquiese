@@ -1,6 +1,5 @@
 package com.alex.dcc025.usuario;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +8,10 @@ import com.alex.dcc025.franquia.Franquia;
 import com.alex.dcc025.franquia.ItemPedido;
 import com.alex.dcc025.franquia.ModalidadeEntrega;
 import com.alex.dcc025.franquia.Pedido;
-import com.alex.dcc025.franquia.Produto;
 
 public class Vendedor extends Usuario {
-    private final Franquia franquia;
-    private final List<Pedido> pedidos;
+    private Franquia franquia;
+    private List<Pedido> pedidos;
 
     public Vendedor(String nome, String cpf, String email, String senha, Franquia franquia) {
         super(nome, cpf, email, senha);
@@ -21,10 +19,7 @@ public class Vendedor extends Usuario {
         this.pedidos = new ArrayList<>();
     }
 
-    public Vendedor(String id, String nome, String cpf, String email, String senha, Franquia franquia, List<Pedido> pedidos) {
-        super(id, nome, cpf, email, senha);
-        this.franquia = franquia;
-        this.pedidos = pedidos;
+    public Vendedor() {
     }
 
     public void cadastrarPedido(String cliente, List<ItemPedido> itens, FormaPagamento formaPagamento, ModalidadeEntrega modalidadeEntrega) {

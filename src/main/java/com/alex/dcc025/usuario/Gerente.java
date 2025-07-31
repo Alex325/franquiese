@@ -1,11 +1,9 @@
 package com.alex.dcc025.usuario;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.alex.dcc025.franquia.Franquia;
 import com.alex.dcc025.franquia.Produto;
-import com.alex.dcc025.util.ID;
 
 public class Gerente extends Usuario {
     private Franquia franquia;
@@ -14,9 +12,7 @@ public class Gerente extends Usuario {
         super(nome, cpf, email, senha);
     }
 
-    public Gerente(String id, String nome, String cpf, String email, String senha, Franquia franquia) {
-        super(nome, cpf, email, senha);
-        this.franquia = franquia;
+    public Gerente() {
     }
 
     public void setFranquia(Franquia franquia) {
