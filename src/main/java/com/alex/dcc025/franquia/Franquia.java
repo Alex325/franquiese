@@ -27,7 +27,8 @@ public class Franquia {
         this.vendedores = new ArrayList<>();
         this.pedidos = new ArrayList<>();
         this.estoque = new ArrayList<>();
-        gerente.setFranquia(this);
+        
+        if (gerente != null) gerente.setFranquia(this);
     }
 
     // para desserialização

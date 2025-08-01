@@ -66,7 +66,7 @@ public class GUI {
     public void mudarTela(JPanel newTela) {
 
         janela.setContentPane(newTela);
-        
+
         janela.pack();
 
         janela.revalidate();

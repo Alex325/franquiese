@@ -79,9 +79,9 @@
               <Component id="informacoesPanel" min="-2" pref="28" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
               <Component id="franquiasPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
               <Component id="gerentesPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="194" max="32767" attributes="0"/>
+              <EmptySpace pref="184" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -138,16 +138,20 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="franquiasScroll" alignment="1" pref="303" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="franquiasLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="franquiasLabel" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="excluirFranquiaButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="visualizarFranquiaButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="adicionarFranquiaButton" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-                  <Component id="visualizarButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -159,7 +163,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="franquiasScroll" min="-2" pref="117" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="visualizarButton" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="excluirFranquiaButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="visualizarFranquiaButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="adicionarFranquiaButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -182,17 +190,33 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Franquia&gt;"/>
               </AuxValues>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="visualizarButton">
+        <Component class="javax.swing.JButton" name="excluirFranquiaButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Excluir"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="excluirFranquiaButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="visualizarFranquiaButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Visualizar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="visualizarButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="visualizarFranquiaButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="adicionarFranquiaButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Adicionar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adicionarFranquiaButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -211,12 +235,11 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="excluirButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="excluirGerenteButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="editarButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="editarGerenteButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cadastrarButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="adicionarGerenteButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -232,9 +255,9 @@
                   <Component id="gerentesScroll" min="-2" pref="117" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="editarButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cadastrarButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="excluirButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="editarGerenteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="adicionarGerenteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="excluirGerenteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -258,33 +281,33 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Gerente&gt;"/>
               </AuxValues>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="editarButton">
+        <Component class="javax.swing.JButton" name="editarGerenteButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Editar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editarButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editarGerenteButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="cadastrarButton">
+        <Component class="javax.swing.JButton" name="adicionarGerenteButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cadastrar"/>
+            <Property name="text" type="java.lang.String" value="Adicionar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adicionarGerenteButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="excluirButton">
+        <Component class="javax.swing.JButton" name="excluirGerenteButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="excluirButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="excluirGerenteButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

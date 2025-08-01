@@ -52,14 +52,16 @@ public class TelaDono extends javax.swing.JPanel {
         franquiasLabel = new javax.swing.JLabel();
         franquiasScroll = new javax.swing.JScrollPane();
         franquiasList = new javax.swing.JList<>();
-        visualizarButton = new javax.swing.JButton();
+        excluirFranquiaButton = new javax.swing.JButton();
+        visualizarFranquiaButton = new javax.swing.JButton();
+        adicionarFranquiaButton = new javax.swing.JButton();
         gerentesPanel = new javax.swing.JPanel();
         gerentesLabel = new javax.swing.JLabel();
         gerentesScroll = new javax.swing.JScrollPane();
         gerentesList = new javax.swing.JList<>();
-        editarButton = new javax.swing.JButton();
-        cadastrarButton = new javax.swing.JButton();
-        excluirButton = new javax.swing.JButton();
+        editarGerenteButton = new javax.swing.JButton();
+        adicionarGerenteButton = new javax.swing.JButton();
+        excluirGerenteButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,10 +117,24 @@ public class TelaDono extends javax.swing.JPanel {
         franquiasList.setModel(new MeuListModel<Franquia>(usuario.getFranquias()));
         franquiasScroll.setViewportView(franquiasList);
 
-        visualizarButton.setText("Visualizar");
-        visualizarButton.addActionListener(new java.awt.event.ActionListener() {
+        excluirFranquiaButton.setText("Excluir");
+        excluirFranquiaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                visualizarButtonActionPerformed(evt);
+                excluirFranquiaButtonActionPerformed(evt);
+            }
+        });
+
+        visualizarFranquiaButton.setText("Visualizar");
+        visualizarFranquiaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visualizarFranquiaButtonActionPerformed(evt);
+            }
+        });
+
+        adicionarFranquiaButton.setText("Adicionar");
+        adicionarFranquiaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adicionarFranquiaButtonActionPerformed(evt);
             }
         });
 
@@ -131,13 +147,16 @@ public class TelaDono extends javax.swing.JPanel {
                 .addGroup(franquiasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(franquiasScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                     .addGroup(franquiasPanelLayout.createSequentialGroup()
-                        .addComponent(franquiasLabel)
+                        .addGroup(franquiasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(franquiasLabel)
+                            .addGroup(franquiasPanelLayout.createSequentialGroup()
+                                .addComponent(excluirFranquiaButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(visualizarFranquiaButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(adicionarFranquiaButton)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(franquiasPanelLayout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(visualizarButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         franquiasPanelLayout.setVerticalGroup(
             franquiasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +166,10 @@ public class TelaDono extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(franquiasScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(visualizarButton)
+                .addGroup(franquiasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(excluirFranquiaButton)
+                    .addComponent(visualizarFranquiaButton)
+                    .addComponent(adicionarFranquiaButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -156,24 +178,24 @@ public class TelaDono extends javax.swing.JPanel {
         gerentesList.setModel(new MeuListModel<Gerente>(usuario.getGerentes()));
         gerentesScroll.setViewportView(gerentesList);
 
-        editarButton.setText("Editar");
-        editarButton.addActionListener(new java.awt.event.ActionListener() {
+        editarGerenteButton.setText("Editar");
+        editarGerenteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarButtonActionPerformed(evt);
+                editarGerenteButtonActionPerformed(evt);
             }
         });
 
-        cadastrarButton.setText("Cadastrar");
-        cadastrarButton.addActionListener(new java.awt.event.ActionListener() {
+        adicionarGerenteButton.setText("Adicionar");
+        adicionarGerenteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastrarButtonActionPerformed(evt);
+                adicionarGerenteButtonActionPerformed(evt);
             }
         });
 
-        excluirButton.setText("Excluir");
-        excluirButton.addActionListener(new java.awt.event.ActionListener() {
+        excluirGerenteButton.setText("Excluir");
+        excluirGerenteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                excluirButtonActionPerformed(evt);
+                excluirGerenteButtonActionPerformed(evt);
             }
         });
 
@@ -189,12 +211,11 @@ public class TelaDono extends javax.swing.JPanel {
                         .addComponent(gerentesLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(gerentesPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(excluirButton)
+                        .addComponent(excluirGerenteButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editarButton)
+                        .addComponent(editarGerenteButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cadastrarButton)))
+                        .addComponent(adicionarGerenteButton)))
                 .addContainerGap())
         );
         gerentesPanelLayout.setVerticalGroup(
@@ -206,9 +227,9 @@ public class TelaDono extends javax.swing.JPanel {
                 .addComponent(gerentesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(gerentesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editarButton)
-                    .addComponent(cadastrarButton)
-                    .addComponent(excluirButton))
+                    .addComponent(editarGerenteButton)
+                    .addComponent(adicionarGerenteButton)
+                    .addComponent(excluirGerenteButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -236,39 +257,49 @@ public class TelaDono extends javax.swing.JPanel {
                 .addComponent(informacoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66)
                 .addComponent(franquiasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
+                .addGap(76, 76, 76)
                 .addComponent(gerentesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void visualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizarButtonActionPerformed
+    private void excluirFranquiaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirFranquiaButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_visualizarButtonActionPerformed
+    }//GEN-LAST:event_excluirFranquiaButtonActionPerformed
 
-    private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
+    private void editarGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarGerenteButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_editarButtonActionPerformed
+    }//GEN-LAST:event_editarGerenteButtonActionPerformed
 
-    private void cadastrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarButtonActionPerformed
+    private void adicionarGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarGerenteButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cadastrarButtonActionPerformed
+    }//GEN-LAST:event_adicionarGerenteButtonActionPerformed
 
-    private void excluirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirButtonActionPerformed
+    private void excluirGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirGerenteButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_excluirButtonActionPerformed
+    }//GEN-LAST:event_excluirGerenteButtonActionPerformed
+
+    private void visualizarFranquiaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizarFranquiaButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_visualizarFranquiaButtonActionPerformed
+
+    private void adicionarFranquiaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarFranquiaButtonActionPerformed
+        janela.mudarTela(new TelaAdicionarFranquia(sistema, usuario, janela));
+    }//GEN-LAST:event_adicionarFranquiaButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cadastrarButton;
-    private javax.swing.JButton editarButton;
-    private javax.swing.JButton excluirButton;
+    private javax.swing.JButton adicionarFranquiaButton;
+    private javax.swing.JButton adicionarGerenteButton;
+    private javax.swing.JButton editarGerenteButton;
+    private javax.swing.JButton excluirFranquiaButton;
+    private javax.swing.JButton excluirGerenteButton;
     private javax.swing.JLabel franquiasLabel;
-    private javax.swing.JList<String> franquiasList;
+    private javax.swing.JList<Franquia> franquiasList;
     private javax.swing.JPanel franquiasPanel;
     private javax.swing.JScrollPane franquiasScroll;
     private javax.swing.JLabel gerentesLabel;
-    private javax.swing.JList<String> gerentesList;
+    private javax.swing.JList<Gerente> gerentesList;
     private javax.swing.JPanel gerentesPanel;
     private javax.swing.JScrollPane gerentesScroll;
     private javax.swing.JPanel informacoesPanel;
@@ -276,6 +307,6 @@ public class TelaDono extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel logadoComoLabel;
     private javax.swing.JLabel nomeUsuarioLabel;
-    private javax.swing.JButton visualizarButton;
+    private javax.swing.JButton visualizarFranquiaButton;
     // End of variables declaration//GEN-END:variables
 }

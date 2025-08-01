@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.ListModel;
 import javax.swing.event.ListDataListener;
 
-public class MeuListModel<T> implements ListModel {
+public class MeuListModel<T> implements ListModel<T> {
     
     private final List<T> data;
     private final List<ListDataListener> listeners;
@@ -25,7 +25,7 @@ public class MeuListModel<T> implements ListModel {
     }
 
     @Override
-    public Object getElementAt(int index) {
+    public T getElementAt(int index) {
         return data.get(index);
     }
 
