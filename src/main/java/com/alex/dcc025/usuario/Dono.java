@@ -1,7 +1,11 @@
 package com.alex.dcc025.usuario;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import com.alex.dcc025.Sistema;
+import com.alex.dcc025.franquia.Endereco;
 import com.alex.dcc025.franquia.Franquia;
 import java.util.ArrayList;
 
@@ -18,35 +22,36 @@ public class Dono extends Usuario {
     public Dono() {
     }
 
-    public void cadastrarFranquia(String nome, String endereco, Gerente gerente) {
+    public void cadastrarFranquia(String nome, Endereco endereco, Gerente gerente) {
         Franquia f = new Franquia(nome, endereco, gerente);
         franquias.add(f);
     }
 
-    public void removerFranquia(Franquia franquia) {
+    public void removerFranquia(Franquia franquia, Sistema sistema) {
         franquias.remove(franquia);
+        sistema.removerUsuarios(franquia.getVendedores().stream().map(v -> (Usuario) v).collect(Collectors.toList()));
+
+        if (franquia.getGerente() != null) franquia.getGerente().setFranquia(null);
     }
 
-    public void listarFranquias() {
-        for (Franquia f : franquias) {
-            f.exibirResumo();
-        }
+    public void cadastrarGerente(String nome, String cpf, String email, String senha, Sistema sistema) {
+        Gerente gerente = new Gerente(nome, cpf, email, senha);
+        gerentes.add(gerente);
+        sistema.cadastrarUsuario(gerente);
     }
 
-    public void cadastrarGerente(String nome, String cpf, String email, String senha) {
-        gerentes.add(new Gerente(nome, cpf, email, senha));
-    }
-
-    public void removerGerente(Gerente gerente) {
+    public void removerGerente(Gerente gerente, Sistema sistema) {
         gerentes.remove(gerente);
+        sistema.removerUsuario(gerente);
+        gerente.getFranquia().setGerente(null);
     }
 
     public Gerente getGerente(int i) {
         return gerentes.get(i);
     }
-
-    public void consultarRankingVendedores(Franquia franquia) {
-        franquia.mostrarRankingVendedores();
+    
+    public Franquia getFranquia(int i) {
+        return this.franquias.get(0);
     }
 
     public final List<Franquia> getFranquias() {
@@ -61,8 +66,5 @@ public class Dono extends Usuario {
         return 0;
     }
 
-    public Franquia getFranquia(int i) {
-        return this.franquias.get(0);
-    }
 
 }

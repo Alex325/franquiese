@@ -1,7 +1,6 @@
 package com.alex.dcc025.gui;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.ComboBoxModel;
@@ -14,11 +13,14 @@ public class MeuComboModel<T> implements ComboBoxModel<T> {
 
     private T selected = null;
 
-    public MeuComboModel(List<T> items) {
+    public MeuComboModel(List<T> items, boolean nullable) {
 
-        this.items.add(null);
+        if (nullable) this.items.add(null);
+       
         this.items.addAll(items);
-
+        
+        if (this.items.size() != 0) this.selected = this.items.get(0);
+        
     }
 
     @Override

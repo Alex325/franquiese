@@ -155,14 +155,14 @@ public class TelaLogin extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(530, 530, 530)
+                .addContainerGap(530, Short.MAX_VALUE)
                 .addComponent(containerGrande, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(511, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(275, 275, 275)
+                .addContainerGap(275, Short.MAX_VALUE)
                 .addComponent(containerGrande, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(275, Short.MAX_VALUE))
         );
@@ -191,7 +191,18 @@ public class TelaLogin extends javax.swing.JPanel {
         
         switch (usuario.getTipo()) {
             case 0 -> janela.mudarTela(new TelaDono(sistema, (Dono) usuario, janela));
-            case 1 -> janela.mudarTela(new TelaGerente(sistema, (Gerente) usuario, janela));
+            case 1 -> {
+                
+                Gerente gerente = (Gerente) usuario;
+
+                if (gerente.getFranquia() == null) {
+                    JOptionPane.showMessageDialog(null, "Gerente deve ter uma franquia associada.");
+                    senhaField.setText("");
+                    return;
+                }
+
+                janela.mudarTela(new TelaGerente(sistema, gerente, janela));
+            }
             case 2 -> janela.mudarTela(new TelaVendedor(sistema, (Vendedor) usuario, janela));
         }
 

@@ -4,31 +4,37 @@
  */
 package com.alex.dcc025.gui;
 
+import java.util.Locale;
+
 import com.alex.dcc025.Sistema;
 import com.alex.dcc025.franquia.Endereco.UF;
 import com.alex.dcc025.franquia.Endereco;
 import com.alex.dcc025.franquia.Franquia;
 import com.alex.dcc025.usuario.Dono;
 import com.alex.dcc025.usuario.Gerente;
+import com.alex.dcc025.usuario.Vendedor;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author SUPERVISOR
  */
-public class TelaAdicionarFranquia extends javax.swing.JPanel {
+public class TelaEditarFranquia extends javax.swing.JPanel {
 
     private final Sistema sistema;
     private final Dono usuario;
     private final GUI janela;
-
+    private final Franquia franquia;
 
     /**
      * Creates new form TelaAdicionarFranquia
      */
-    public TelaAdicionarFranquia(Sistema sistema, Dono usuario, GUI janela) {
+    public TelaEditarFranquia(Sistema sistema, Dono usuario, GUI janela, Franquia franquia) {
         this.sistema = sistema;
         this.usuario = usuario;
         this.janela = janela;
+        this.franquia = franquia;
         initComponents();
     }
 
@@ -45,50 +51,48 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
         principal = new javax.swing.JPanel();
         nomePanel = new javax.swing.JPanel();
         nomeLabel = new javax.swing.JLabel();
-        nomeField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        gerenteCombo = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         enderecoPanel = new javax.swing.JPanel();
         enderecoLabel = new javax.swing.JLabel();
         enderecoCepPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        cepField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         enderecoLogradouroPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        logradouroField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         enderecoNumeroPanel = new javax.swing.JPanel();
         numeroLabel = new javax.swing.JLabel();
-        numeroField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         enderecoComplementoPanel = new javax.swing.JPanel();
         complementoLabel = new javax.swing.JLabel();
-        complementoField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         enderecoBairroPanel = new javax.swing.JPanel();
         bairroLabel = new javax.swing.JLabel();
-        bairroField = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         enderecoUfPanel = new javax.swing.JPanel();
         ufLabel = new javax.swing.JLabel();
-        ufCombo = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         municipioLabel = new javax.swing.JLabel();
-        municipioField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1600, 900));
 
         adicionarFranquiaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        adicionarFranquiaLabel.setText("Adicionar Franquia");
+        adicionarFranquiaLabel.setText("Visualizar Franquia");
+
+        principal.setPreferredSize(new java.awt.Dimension(574, 415));
 
         nomePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         nomeLabel.setText("Nome");
 
-        nomeField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeFieldActionPerformed(evt);
-            }
-        });
+        jLabel3.setText(franquia.getNome());
 
         javax.swing.GroupLayout nomePanelLayout = new javax.swing.GroupLayout(nomePanel);
         nomePanel.setLayout(nomePanelLayout);
@@ -97,11 +101,9 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
             .addGroup(nomePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(nomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(nomePanelLayout.createSequentialGroup()
-                        .addComponent(nomeLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(nomeField))
-                .addContainerGap())
+                    .addComponent(nomeLabel)
+                    .addComponent(jLabel3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         nomePanelLayout.setVerticalGroup(
             nomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,15 +111,15 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(nomeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel3)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel8.setText("Gerente");
 
-        gerenteCombo.setModel(new MeuComboModel<Gerente>(usuario.getGerentes(), true));
+        jComboBox1.setModel(new MeuComboModel<Gerente>(usuario.getGerentes().stream().filter(g -> g.getFranquia() == null).toList(), false));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -129,7 +131,7 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(gerenteCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -138,8 +140,8 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gerenteCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         enderecoPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -151,7 +153,7 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
 
         jLabel1.setText("CEP");
 
-        cepField.setColumns(6);
+        jLabel4.setText(franquia.getEndereco().getCep());
 
         javax.swing.GroupLayout enderecoCepPanelLayout = new javax.swing.GroupLayout(enderecoCepPanel);
         enderecoCepPanel.setLayout(enderecoCepPanelLayout);
@@ -161,7 +163,7 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(enderecoCepPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(cepField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         enderecoCepPanelLayout.setVerticalGroup(
@@ -170,11 +172,13 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cepField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel4)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jLabel2.setText("Logradouro");
+
+        jLabel5.setText(franquia.getEndereco().getLogradouro());
 
         javax.swing.GroupLayout enderecoLogradouroPanelLayout = new javax.swing.GroupLayout(enderecoLogradouroPanel);
         enderecoLogradouroPanel.setLayout(enderecoLogradouroPanelLayout);
@@ -183,23 +187,23 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
             .addGroup(enderecoLogradouroPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(enderecoLogradouroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(enderecoLogradouroPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(logradouroField))
-                .addContainerGap())
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         enderecoLogradouroPanelLayout.setVerticalGroup(
             enderecoLogradouroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, enderecoLogradouroPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logradouroField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         numeroLabel.setText("Número");
+
+        jLabel6.setText(franquia.getEndereco().getNumero());
 
         javax.swing.GroupLayout enderecoNumeroPanelLayout = new javax.swing.GroupLayout(enderecoNumeroPanel);
         enderecoNumeroPanel.setLayout(enderecoNumeroPanelLayout);
@@ -207,12 +211,10 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
             enderecoNumeroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(enderecoNumeroPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(numeroField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(enderecoNumeroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(numeroLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, enderecoNumeroPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(numeroLabel)
-                .addContainerGap())
         );
         enderecoNumeroPanelLayout.setVerticalGroup(
             enderecoNumeroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,11 +222,13 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(numeroLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(numeroField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel6)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         complementoLabel.setText("Complemento");
+
+        jLabel7.setText(franquia.getEndereco().getComplemento());
 
         javax.swing.GroupLayout enderecoComplementoPanelLayout = new javax.swing.GroupLayout(enderecoComplementoPanel);
         enderecoComplementoPanel.setLayout(enderecoComplementoPanelLayout);
@@ -233,11 +237,9 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
             .addGroup(enderecoComplementoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(enderecoComplementoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(enderecoComplementoPanelLayout.createSequentialGroup()
-                        .addComponent(complementoLabel)
-                        .addGap(0, 51, Short.MAX_VALUE))
-                    .addComponent(complementoField))
-                .addContainerGap())
+                    .addComponent(complementoLabel)
+                    .addComponent(jLabel7))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         enderecoComplementoPanelLayout.setVerticalGroup(
             enderecoComplementoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,11 +247,13 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(complementoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(complementoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel7)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         bairroLabel.setText("Bairro");
+
+        jLabel10.setText(franquia.getEndereco().getBairro());
 
         javax.swing.GroupLayout enderecoBairroPanelLayout = new javax.swing.GroupLayout(enderecoBairroPanel);
         enderecoBairroPanel.setLayout(enderecoBairroPanelLayout);
@@ -258,11 +262,9 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
             .addGroup(enderecoBairroPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(enderecoBairroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(enderecoBairroPanelLayout.createSequentialGroup()
-                        .addComponent(bairroLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(bairroField, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(bairroLabel)
+                    .addComponent(jLabel10))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         enderecoBairroPanelLayout.setVerticalGroup(
             enderecoBairroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,14 +272,13 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(bairroLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bairroField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel10)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         ufLabel.setText("UF");
 
-        ufCombo.setModel(new MeuComboModel<UF>(Endereco.ufs, false));
-        ufCombo.setSelectedItem(Endereco.ufs.get(0));
+        jLabel11.setText(franquia.getEndereco().getUf().toString());
 
         javax.swing.GroupLayout enderecoUfPanelLayout = new javax.swing.GroupLayout(enderecoUfPanel);
         enderecoUfPanel.setLayout(enderecoUfPanelLayout);
@@ -287,8 +288,8 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(enderecoUfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ufLabel)
-                    .addComponent(ufCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel11))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         enderecoUfPanelLayout.setVerticalGroup(
             enderecoUfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,11 +297,13 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(ufLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ufCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel11)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         municipioLabel.setText("Município");
+
+        jLabel9.setText(franquia.getEndereco().getCidade());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -309,11 +312,9 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(municipioLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(municipioField, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(municipioLabel)
+                    .addComponent(jLabel9))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,8 +322,8 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(municipioLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(municipioField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel9)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout enderecoPanelLayout = new javax.swing.GroupLayout(enderecoPanel);
@@ -333,26 +334,23 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(enderecoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(enderecoPanelLayout.createSequentialGroup()
-                        .addGroup(enderecoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(enderecoPanelLayout.createSequentialGroup()
-                                .addComponent(enderecoLogradouroPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(enderecoNumeroPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(enderecoPanelLayout.createSequentialGroup()
-                                .addGroup(enderecoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(enderecoCepPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(enderecoLabel))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                        .addComponent(enderecoLogradouroPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(enderecoNumeroPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(enderecoPanelLayout.createSequentialGroup()
-                        .addComponent(enderecoComplementoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(enderecoBairroPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(enderecoUfPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 169, Short.MAX_VALUE))))
+                        .addGroup(enderecoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(enderecoLabel)
+                            .addComponent(enderecoCepPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(enderecoPanelLayout.createSequentialGroup()
+                                .addComponent(enderecoComplementoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(enderecoBairroPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(enderecoUfPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         enderecoPanelLayout.setVerticalGroup(
             enderecoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,17 +373,17 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Adicionar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Voltar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Editar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -395,16 +393,16 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
             principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(enderecoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nomePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalLayout.createSequentialGroup()
-                            .addComponent(jButton2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton1))))
+                .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(enderecoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nomePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(principalLayout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addGap(6, 6, 6)))
                 .addContainerGap())
         );
         principalLayout.setVerticalGroup(
@@ -418,21 +416,21 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(273, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(306, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(513, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(adicionarFranquiaLabel)
                     .addComponent(principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addContainerGap(513, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,25 +438,25 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(adicionarFranquiaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addComponent(principal, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(192, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void nomeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeFieldActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         janela.mudarTela(new TelaDono(sistema, usuario, janela));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Endereco endereco = new Endereco(cepField.getText().trim(), logradouroField.getText().trim(), numeroField.getText().trim(), complementoField.getText().trim(), municipioField.getText().trim(), bairroField.getText().trim(), (UF) ufCombo.getSelectedItem());
         
-        Gerente gerente = (Gerente) gerenteCombo.getSelectedItem();
         
-        usuario.cadastrarFranquia(nomeField.getText(), endereco, gerente);
+        if (jComboBox1.getSelectedItem() == null) {
+        
+            JOptionPane.showMessageDialog(null, "Gerente vazio não pode ser escolhido. Se não há opções, cadastre um gerente.");
+            return;
+        }
+        
+        franquia.setGerente((Gerente) jComboBox1.getSelectedItem());
         
         janela.mudarTela(new TelaDono(sistema, usuario, janela));
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -466,10 +464,7 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adicionarFranquiaLabel;
-    private javax.swing.JTextField bairroField;
     private javax.swing.JLabel bairroLabel;
-    private javax.swing.JTextField cepField;
-    private javax.swing.JTextField complementoField;
     private javax.swing.JLabel complementoLabel;
     private javax.swing.JPanel enderecoBairroPanel;
     private javax.swing.JPanel enderecoCepPanel;
@@ -479,24 +474,27 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
     private javax.swing.JPanel enderecoNumeroPanel;
     private javax.swing.JPanel enderecoPanel;
     private javax.swing.JPanel enderecoUfPanel;
-    private javax.swing.JComboBox<Gerente> gerenteCombo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<Gerente> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField logradouroField;
-    private javax.swing.JTextField municipioField;
     private javax.swing.JLabel municipioLabel;
-    private javax.swing.JTextField nomeField;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JPanel nomePanel;
-    private javax.swing.JTextField numeroField;
     private javax.swing.JLabel numeroLabel;
     private javax.swing.JPanel principal;
-    private javax.swing.JComboBox<UF> ufCombo;
     private javax.swing.JLabel ufLabel;
     // End of variables declaration//GEN-END:variables
 }

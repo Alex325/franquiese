@@ -13,35 +13,32 @@ public class Franquia {
 
     private String id;
     private String nome;
-    private String endereco;
+    private Endereco endereco;
     private Gerente gerente;
     private List<Vendedor> vendedores;
     private List<Pedido> pedidos;
-    private List<Produto> estoque;
+    private Map<Produto, Integer> estoque;
 
-    public Franquia(String nome, String endereco, Gerente gerente) {
+    public Franquia(String nome, Endereco endereco, Gerente gerente) {
         this.id = ID.getUUID();
         this.nome = nome;
         this.endereco = endereco;
         this.gerente = gerente;
         this.vendedores = new ArrayList<>();
         this.pedidos = new ArrayList<>();
-        this.estoque = new ArrayList<>();
+        this.estoque = new HashMap<>();
         
         if (gerente != null) gerente.setFranquia(this);
     }
 
-    // para desserialização
     public Franquia() {}
 
     public void adicionarPedido(Pedido pedido) {
         pedidos.add(pedido);
     }
 
-    public void mostrarEstoque() {
-        for (Produto p : estoque) {
-            System.out.println(p);
-        }
+    public boolean isEstoqueBaixo(Produto produto) {
+        return estoque.get(produto) < 5;
     }
 
     public void listarPedidos() {
@@ -50,11 +47,17 @@ public class Franquia {
         }
     }
 
-    public void exibirResumo() {
-        System.out.println("Franquia: " + nome);
-        System.out.println("Gerente: " + (gerente != null ? gerente.getNome() : "Não definido"));
-        System.out.println("Total de pedidos: " + pedidos.size());
-        // Calcular receita, ticket médio, etc.
+    public double ticketMedio() {
+        return faturamento()/numeroPedidos();
+    }
+
+    public double faturamento() {
+        return this.pedidos.stream()
+        .map(Pedido::calcularValorTotal).reduce(0.0, (i, p) -> i + p);
+    }
+
+    public int numeroPedidos() {
+        return this.pedidos.size();
     }
 
     public void cadastrarVendedor(Vendedor vendedor) {
@@ -65,7 +68,7 @@ public class Franquia {
         Map<Vendedor, Double> vendasPorVendedor = new HashMap<>();
         for (Pedido p : pedidos) {
             vendasPorVendedor.put(p.getVendedor(),
-                vendasPorVendedor.getOrDefault(p.getVendedor(), 0.0) + p.getValorTotal());
+                vendasPorVendedor.getOrDefault(p.getVendedor(), 0.0) + p.calcularValorTotal());
         }
 
         vendasPorVendedor.entrySet()
@@ -74,12 +77,8 @@ public class Franquia {
             .forEach(entry -> System.out.println(entry.getKey().getNome() + ": R$ " + entry.getValue()));
     }
 
-    public void cadastrarProduto(Produto produto) {
-        estoque.add(produto);
-    }
-
-    public void mostrarRelatorio() {
-        // histórico de vendas, clientes mais recorrentes, etc.
+    public void cadastrarProduto(Produto produto, int quantidade) {
+        estoque.put(produto, quantidade);
     }
 
     public String getId() {
@@ -88,11 +87,15 @@ public class Franquia {
     public String getNome() {
         return this.nome;
     }
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return this.endereco;
     }
     public Gerente getGerente() {
         return this.gerente;
+    }
+    public void setGerente(Gerente gerente) {
+        this.gerente = gerente;
+        gerente.setFranquia(this);
     }
     public List<Vendedor> getVendedores() {
         return this.vendedores;
@@ -100,7 +103,7 @@ public class Franquia {
     public List<Pedido> getPedidos() {
         return this.pedidos;
     }
-    public List<Produto> getEstoque() {
+    public Map<Produto, Integer> getEstoque() {
         return this.estoque;
     }
 
@@ -114,6 +117,13 @@ public class Franquia {
         string.append(" - ");
         string.append(this.gerente != null ? this.gerente.getNome() : "sem gerente");
         return string.toString();
+    }
+
+    public void alterarProduto(Produto produto, String nome, double preco, String descricao, int quantidade) {
+        produto.setNome(nome);
+        produto.setPreco(preco);
+        produto.setDescricao(descricao);
+        estoque.put(produto, quantidade);
     }
 
 }

@@ -8,14 +8,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-
-import com.alex.dcc025.franquia.FormaPagamento;
+import com.alex.dcc025.franquia.Endereco;
+import com.alex.dcc025.franquia.Endereco.UF;
 import com.alex.dcc025.franquia.Franquia;
 import com.alex.dcc025.franquia.ItemPedido;
-import com.alex.dcc025.franquia.ModalidadeEntrega;
 import com.alex.dcc025.franquia.Pedido;
+import com.alex.dcc025.franquia.Pedido.FormaPagamento;
+import com.alex.dcc025.franquia.Pedido.ModalidadeEntrega;
 import com.alex.dcc025.franquia.Produto;
 import com.alex.dcc025.usuario.Dono;
 import com.alex.dcc025.usuario.Gerente;
@@ -57,6 +59,8 @@ public class Serializador {
         kryo.register(Gerente.class);
         kryo.register(Vendedor.class);
         kryo.register(Franquia.class);
+        kryo.register(Endereco.class);
+        kryo.register(UF.class);
         kryo.register(Produto.class);
         kryo.register(Pedido.class);
         kryo.register(ItemPedido.class);
@@ -64,6 +68,7 @@ public class Serializador {
         kryo.register(ModalidadeEntrega.class);
         kryo.register(LocalDateTime.class);
         kryo.register(ArrayList.class);
+        kryo.register(HashMap.class);
         
     }
 

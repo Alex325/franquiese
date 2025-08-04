@@ -3,11 +3,11 @@ package com.alex.dcc025.usuario;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alex.dcc025.franquia.FormaPagamento;
 import com.alex.dcc025.franquia.Franquia;
 import com.alex.dcc025.franquia.ItemPedido;
-import com.alex.dcc025.franquia.ModalidadeEntrega;
 import com.alex.dcc025.franquia.Pedido;
+import com.alex.dcc025.franquia.Pedido.FormaPagamento;
+import com.alex.dcc025.franquia.Pedido.ModalidadeEntrega;
 
 public class Vendedor extends Usuario {
     private Franquia franquia;
@@ -30,6 +30,15 @@ public class Vendedor extends Usuario {
 
     public List<Pedido> getPedidos() {
         return pedidos;
+    }
+
+    public double getValor() {
+        return pedidos.stream()
+        .map(Pedido::calcularValorTotal).reduce(0.0, (i, p) -> i + p);
+    }
+
+    public int getVolume() {
+        return pedidos.size();
     }
 
     public void solicitarAlteracaoPedido(Pedido pedido) {

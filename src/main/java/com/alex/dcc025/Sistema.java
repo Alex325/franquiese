@@ -3,12 +3,12 @@ package com.alex.dcc025;
 import java.util.List;
 
 import com.alex.dcc025.usuario.Usuario;
+import com.alex.dcc025.usuario.Vendedor;
 import com.alex.dcc025.util.Serializador;
 
 public class Sistema {
 
     private List<Usuario> usuarios;
-    private transient Usuario usuarioAtual;
 
     public Sistema() {
         loadUsuarios();
@@ -22,7 +22,7 @@ public class Sistema {
     public Usuario login(String email, String senha) {
 
         for (Usuario usuario : usuarios) {
-            if (usuario.validar(email, senha)) { usuarioAtual = usuario; return usuario; }
+            if (usuario.validar(email, senha)) return usuario;
         }
 
         return null;
@@ -33,6 +33,10 @@ public class Sistema {
         usuarios.add(usuario);
     }
 
+    public void removerUsuario(Usuario usuario) {
+        usuarios.remove(usuario);
+    }
+
     private void salvar() {
         Serializador.saveState(usuarios);
     }
@@ -41,8 +45,8 @@ public class Sistema {
         usuarios = Serializador.loadState();
     }
 
-    public Usuario getUsuarioAtual() {
-        return usuarioAtual;
+    public void removerUsuarios(List<Usuario> usuarios) {
+        usuarios.removeAll(usuarios);
     }
 
 }

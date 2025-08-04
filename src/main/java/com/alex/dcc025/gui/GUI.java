@@ -19,8 +19,13 @@ public class GUI {
 
         janela = new JFrame("Sistema de Franquias");
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janela.setPreferredSize(new Dimension(1280, 720));
+        janela.setPreferredSize(new Dimension(1600, 900));
         
+        janela.setResizable(false);
+
+        janela.pack();
+        janela.setLocationRelativeTo(null);
+
         janela.addWindowListener(new WindowListener() {
             public void windowClosing(WindowEvent e) {
                 sistema.onExit();

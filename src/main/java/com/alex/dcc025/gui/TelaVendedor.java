@@ -4,8 +4,16 @@
  */
 package com.alex.dcc025.gui;
 
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
+
 import com.alex.dcc025.Sistema;
+import com.alex.dcc025.franquia.Franquia;
+import com.alex.dcc025.franquia.Pedido;
+import com.alex.dcc025.usuario.Dono;
+import com.alex.dcc025.usuario.Gerente;
 import com.alex.dcc025.usuario.Vendedor;
+import com.alex.dcc025.usuario.Usuario;
 
 /**
  *
@@ -16,9 +24,9 @@ public class TelaVendedor extends javax.swing.JPanel {
     private final Sistema sistema;
     private final Vendedor usuario;
     private final GUI janela;
-
+    
     /**
-     * Creates new form TelaVendedor
+     * Creates new form TelaDono
      */
     public TelaVendedor(Sistema sistema, Vendedor usuario, GUI janela) {
         this.sistema = sistema;
@@ -36,19 +44,180 @@ public class TelaVendedor extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        informacoesPanel = new javax.swing.JPanel();
+        logadoComoLabel = new javax.swing.JLabel();
+        nomeUsuarioLabel = new javax.swing.JLabel();
+        gerentesPanel = new javax.swing.JPanel();
+        gerentesLabel = new javax.swing.JLabel();
+        gerentesScroll = new javax.swing.JScrollPane();
+        vendedoresList = new javax.swing.JList<>();
+        editarGerenteButton = new javax.swing.JButton();
+        adicionarGerenteButton = new javax.swing.JButton();
+        excluirGerenteButton = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+
+        logadoComoLabel.setText("Logado como:");
+
+        nomeUsuarioLabel.setText(String.format("%s (%s)", usuario.getNome(), usuario.getClass().getSimpleName())
+        );
+
+        javax.swing.GroupLayout informacoesPanelLayout = new javax.swing.GroupLayout(informacoesPanel);
+        informacoesPanel.setLayout(informacoesPanelLayout);
+        informacoesPanelLayout.setHorizontalGroup(
+            informacoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(informacoesPanelLayout.createSequentialGroup()
+                .addComponent(logadoComoLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nomeUsuarioLabel)
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+        informacoesPanelLayout.setVerticalGroup(
+            informacoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, informacoesPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(informacoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(logadoComoLabel)
+                    .addComponent(nomeUsuarioLabel))
+                .addGap(28, 28, 28))
+        );
+
+        gerentesLabel.setText("Pedidos");
+
+        vendedoresList.setModel(new MeuListModel<Pedido>(usuario.getPedidos()));
+        gerentesScroll.setViewportView(vendedoresList);
+
+        editarGerenteButton.setText("Editar");
+        editarGerenteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarGerenteButtonActionPerformed(evt);
+            }
+        });
+
+        adicionarGerenteButton.setText("Adicionar");
+        adicionarGerenteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adicionarGerenteButtonActionPerformed(evt);
+            }
+        });
+
+        excluirGerenteButton.setText("Excluir");
+        excluirGerenteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excluirGerenteButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout gerentesPanelLayout = new javax.swing.GroupLayout(gerentesPanel);
+        gerentesPanel.setLayout(gerentesPanelLayout);
+        gerentesPanelLayout.setHorizontalGroup(
+            gerentesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerentesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(gerentesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gerentesScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                    .addGroup(gerentesPanelLayout.createSequentialGroup()
+                        .addGroup(gerentesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(gerentesLabel)
+                            .addGroup(gerentesPanelLayout.createSequentialGroup()
+                                .addComponent(excluirGerenteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editarGerenteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(adicionarGerenteButton)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        gerentesPanelLayout.setVerticalGroup(
+            gerentesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerentesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gerentesLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gerentesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(gerentesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editarGerenteButton)
+                    .addComponent(adicionarGerenteButton)
+                    .addComponent(excluirGerenteButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(1058, Short.MAX_VALUE)
+                        .addComponent(informacoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(gerentesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(informacoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(322, 322, 322)
+                .addComponent(gerentesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(184, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void editarGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarGerenteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editarGerenteButtonActionPerformed
+
+    private void adicionarGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarGerenteButtonActionPerformed
+        janela.mudarTela(new TelaAdicionarPedido(sistema, usuario, janela));
+    }//GEN-LAST:event_adicionarGerenteButtonActionPerformed
+
+    private void excluirGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirGerenteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_excluirGerenteButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton adicionarGerenteButton;
+    private javax.swing.JButton editarGerenteButton;
+    private javax.swing.JButton excluirGerenteButton;
+    private javax.swing.JLabel gerentesLabel;
+    private javax.swing.JPanel gerentesPanel;
+    private javax.swing.JScrollPane gerentesScroll;
+    private javax.swing.JPanel informacoesPanel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel logadoComoLabel;
+    private javax.swing.JLabel nomeUsuarioLabel;
+    private javax.swing.JList<Pedido> vendedoresList;
     // End of variables declaration//GEN-END:variables
 }

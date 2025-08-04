@@ -13,6 +13,7 @@ import com.alex.dcc025.usuario.Dono;
 import com.alex.dcc025.usuario.Gerente;
 import com.alex.dcc025.usuario.Vendedor;
 import com.alex.dcc025.usuario.Usuario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -55,6 +56,7 @@ public class TelaDono extends javax.swing.JPanel {
         excluirFranquiaButton = new javax.swing.JButton();
         visualizarFranquiaButton = new javax.swing.JButton();
         adicionarFranquiaButton = new javax.swing.JButton();
+        editarFranquiaButton = new javax.swing.JButton();
         gerentesPanel = new javax.swing.JPanel();
         gerentesLabel = new javax.swing.JLabel();
         gerentesScroll = new javax.swing.JScrollPane();
@@ -138,6 +140,13 @@ public class TelaDono extends javax.swing.JPanel {
             }
         });
 
+        editarFranquiaButton.setText("Mudar gerente");
+        editarFranquiaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarFranquiaButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout franquiasPanelLayout = new javax.swing.GroupLayout(franquiasPanel);
         franquiasPanel.setLayout(franquiasPanelLayout);
         franquiasPanelLayout.setHorizontalGroup(
@@ -145,17 +154,18 @@ public class TelaDono extends javax.swing.JPanel {
             .addGroup(franquiasPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(franquiasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(franquiasScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                    .addComponent(franquiasScroll, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(franquiasPanelLayout.createSequentialGroup()
-                        .addGroup(franquiasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(franquiasLabel)
-                            .addGroup(franquiasPanelLayout.createSequentialGroup()
-                                .addComponent(excluirFranquiaButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(visualizarFranquiaButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(adicionarFranquiaButton)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(franquiasLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(franquiasPanelLayout.createSequentialGroup()
+                        .addComponent(excluirFranquiaButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(visualizarFranquiaButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editarFranquiaButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(adicionarFranquiaButton)))
                 .addContainerGap())
         );
         franquiasPanelLayout.setVerticalGroup(
@@ -169,7 +179,8 @@ public class TelaDono extends javax.swing.JPanel {
                 .addGroup(franquiasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(excluirFranquiaButton)
                     .addComponent(visualizarFranquiaButton)
-                    .addComponent(adicionarFranquiaButton))
+                    .addComponent(adicionarFranquiaButton)
+                    .addComponent(editarFranquiaButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -206,16 +217,17 @@ public class TelaDono extends javax.swing.JPanel {
             .addGroup(gerentesPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(gerentesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gerentesScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                    .addComponent(gerentesScroll)
                     .addGroup(gerentesPanelLayout.createSequentialGroup()
-                        .addComponent(gerentesLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(gerentesPanelLayout.createSequentialGroup()
-                        .addComponent(excluirGerenteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editarGerenteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(adicionarGerenteButton)))
+                        .addGroup(gerentesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(gerentesLabel)
+                            .addGroup(gerentesPanelLayout.createSequentialGroup()
+                                .addComponent(excluirGerenteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editarGerenteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(adicionarGerenteButton)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         gerentesPanelLayout.setVerticalGroup(
@@ -244,9 +256,9 @@ public class TelaDono extends javax.swing.JPanel {
                         .addComponent(informacoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(gerentesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(franquiasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(franquiasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(gerentesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -264,33 +276,49 @@ public class TelaDono extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void excluirFranquiaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirFranquiaButtonActionPerformed
-        // TODO add your handling code here:
+        if (franquiasList.getSelectedValue() == null) return;
+        
+        usuario.removerFranquia(franquiasList.getSelectedValue(), sistema);
+        janela.mudarTela(new TelaDono(sistema, usuario, janela));
     }//GEN-LAST:event_excluirFranquiaButtonActionPerformed
 
     private void editarGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarGerenteButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_editarGerenteButtonActionPerformed
 
     private void adicionarGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarGerenteButtonActionPerformed
-        // TODO add your handling code here:
+        janela.mudarTela(new TelaAdicionarGerente(sistema, usuario, janela));
     }//GEN-LAST:event_adicionarGerenteButtonActionPerformed
 
     private void excluirGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirGerenteButtonActionPerformed
-        // TODO add your handling code here:
+        if (gerentesList.getSelectedValue() == null) return;
+        
+        usuario.removerGerente(gerentesList.getSelectedValue(), sistema);
+        janela.mudarTela(new TelaDono(sistema, usuario, janela));
     }//GEN-LAST:event_excluirGerenteButtonActionPerformed
 
     private void visualizarFranquiaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizarFranquiaButtonActionPerformed
-        // TODO add your handling code here:
+        if (franquiasList.getSelectedValue() == null) return;
+        
+        janela.mudarTela(new TelaVisualizarFranquia(sistema, usuario, janela, franquiasList.getSelectedValue()));
+        
     }//GEN-LAST:event_visualizarFranquiaButtonActionPerformed
 
     private void adicionarFranquiaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarFranquiaButtonActionPerformed
         janela.mudarTela(new TelaAdicionarFranquia(sistema, usuario, janela));
     }//GEN-LAST:event_adicionarFranquiaButtonActionPerformed
 
+    private void editarFranquiaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarFranquiaButtonActionPerformed
+        if (franquiasList.getSelectedValue() == null) return;
+        
+        janela.mudarTela(new TelaEditarFranquia(sistema, usuario, janela, franquiasList.getSelectedValue()));
+    }//GEN-LAST:event_editarFranquiaButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adicionarFranquiaButton;
     private javax.swing.JButton adicionarGerenteButton;
+    private javax.swing.JButton editarFranquiaButton;
     private javax.swing.JButton editarGerenteButton;
     private javax.swing.JButton excluirFranquiaButton;
     private javax.swing.JButton excluirGerenteButton;
