@@ -38,7 +38,7 @@
               <Component id="adicionarFranquiaLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="principal" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="106" max="32767" attributes="0"/>
+              <EmptySpace pref="158" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -65,17 +65,18 @@
                               <Component id="nomePanel" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="formaPanel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="modalidadePanel" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
                                           <Component id="voltarButton" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="adicionarButton" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="modalidadePanel" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -95,11 +96,11 @@
                   <Component id="produtosScrollPane" min="-2" pref="350" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <Component id="formaPanel" min="-2" max="-2" attributes="0"/>
                       <Component id="modalidadePanel" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="68" max="32767" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="adicionarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="voltarButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -122,16 +123,13 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="nomeLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="nomeField" alignment="0" pref="639" max="32767" attributes="0"/>
+                          <Component id="nomeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="555" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -141,8 +139,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="nomeLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="nomeField" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -153,16 +151,18 @@
                 <Property name="text" type="java.lang.String" value="Nome do Cliente"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="nomeField">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomeFieldActionPerformed"/>
-              </Events>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="pedido.getCliente()" type="code"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JButton" name="adicionarButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Adicionar"/>
+            <Property name="text" type="java.lang.String" value="Pedir edi&#xe7;&#xe3;o"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adicionarButtonActionPerformed"/>
@@ -182,7 +182,7 @@
           <SubComponents>
             <Container class="javax.swing.JPanel" name="produtosPanel">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="JLabel produto1 = new JLabel(&quot;Produto&quot;);&#xd;&#xa;JLabel quantidade = new JLabel(&quot;Quantidade&quot;);&#xd;&#xa;&#xd;&#xa;produtosPanel.add(produto1);&#xd;&#xa;produtosPanel.add(quantidade);&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;for (Entry&lt;Produto, Integer&gt; produto : usuario.getFranquia().getEstoque().entrySet()) {&#xd;&#xa;    JLabel label = new JLabel(produto.getKey().toString());&#xd;&#xa;    SpinnerNumberModel model = new SpinnerNumberModel(0, 0, (int)produto.getValue(), 1);&#xd;&#xa;    JSpinner spinner = new JSpinner(model);&#xd;&#xa;&#xd;&#xa;    spinner.addChangeListener(e -&gt; {&#xd;&#xa;        jLabel2.setText(String.format(Locale.getDefault(), &quot;R$ %,.2f&quot;, this.calcularValorTotal()));&#xd;&#xa;    });&#xd;&#xa;&#xd;&#xa;    produtosPanel.add(label);&#xd;&#xa;    produtosPanel.add(spinner);&#xd;&#xa;&#xd;&#xa;    quantidadesMap.put(produto.getKey(), spinner);&#xd;&#xa;}&#xd;&#xa;&#xd;&#xa;produtosPanel.revalidate();&#xd;&#xa;produtosPanel.repaint();"/>
+                <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="JLabel produto1 = new JLabel(&quot;Produto&quot;);&#xd;&#xa;JLabel quantidade = new JLabel(&quot;Quantidade&quot;);&#xd;&#xa;&#xd;&#xa;produtosPanel.add(produto1);&#xd;&#xa;produtosPanel.add(quantidade);&#xd;&#xa;&#xd;&#xa;for (Entry&lt;Produto, Integer&gt; produto : usuario.getFranquia().getEstoque().entrySet()) {&#xd;&#xa;    &#xd;&#xa;    List&lt;ItemPedido&gt; itens = pedido.getItens().stream().filter(i -&gt; i.getProduto() == produto.getKey()).toList();&#xd;&#xa;    ItemPedido item = null;&#xd;&#xa;    &#xd;&#xa;    if (itens.size() != 0) item = itens.get(0);&#xd;&#xa;&#xd;&#xa;    JLabel label = new JLabel(produto.getKey().toString());&#xd;&#xa;    SpinnerNumberModel model = new SpinnerNumberModel(item != null ? item.getQuantidade() : 0, 0, item != null ? item.getQuantidade() + produto.getValue() : produto.getValue(), 1);&#xd;&#xa;    JSpinner spinner = new JSpinner(model);&#xd;&#xa;&#xd;&#xa;    spinner.addChangeListener(e -&gt; {&#xd;&#xa;        jLabel3.setText(String.format(Locale.getDefault(), &quot;R$ %,.2f&quot;, this.calcularValorTotal()));&#xd;&#xa;    });&#xd;&#xa;&#xd;&#xa;    produtosPanel.add(label);&#xd;&#xa;    produtosPanel.add(spinner);&#xd;&#xa;&#xd;&#xa;    quantidadesMap.put(item.getProduto(), spinner);&#xd;&#xa;}&#xd;&#xa;&#xd;&#xa;produtosPanel.revalidate();&#xd;&#xa;produtosPanel.repaint();"/>
               </AuxValues>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
@@ -290,8 +290,8 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="49" max="32767" attributes="0"/>
                   </Group>
@@ -301,21 +301,21 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="33" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Total:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="jLabel3">
             </Component>
           </SubComponents>
         </Container>

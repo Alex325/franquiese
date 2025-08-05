@@ -11,7 +11,9 @@ import javax.swing.ListModel;
 
 import com.alex.dcc025.Sistema;
 import com.alex.dcc025.franquia.Franquia;
+import com.alex.dcc025.franquia.Pedido;
 import com.alex.dcc025.franquia.Produto;
+import com.alex.dcc025.franquia.Solicitacao;
 import com.alex.dcc025.usuario.Dono;
 import com.alex.dcc025.usuario.Gerente;
 import com.alex.dcc025.usuario.Vendedor;
@@ -65,6 +67,19 @@ public class TelaGerente extends javax.swing.JPanel {
         editarGerenteButton1 = new javax.swing.JButton();
         adicionarGerenteButton1 = new javax.swing.JButton();
         excluirGerenteButton1 = new javax.swing.JButton();
+        gerentesPanel2 = new javax.swing.JPanel();
+        gerentesLabel2 = new javax.swing.JLabel();
+        gerentesScroll2 = new javax.swing.JScrollPane();
+        vendedoresList2 = new javax.swing.JList<>();
+        adicionarGerenteButton2 = new javax.swing.JButton();
+        excluirGerenteButton2 = new javax.swing.JButton();
+        gerentesPanel3 = new javax.swing.JPanel();
+        gerentesLabel3 = new javax.swing.JLabel();
+        gerentesScroll3 = new javax.swing.JScrollPane();
+        vendedoresList3 = new javax.swing.JList<>();
+        editarGerenteButton2 = new javax.swing.JButton();
+        excluirGerenteButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -209,7 +224,7 @@ public class TelaGerente extends javax.swing.JPanel {
             .addGroup(gerentesPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(gerentesPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gerentesScroll1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                    .addComponent(gerentesScroll1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                     .addGroup(gerentesPanel1Layout.createSequentialGroup()
                         .addGroup(gerentesPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(gerentesLabel1)
@@ -234,7 +249,116 @@ public class TelaGerente extends javax.swing.JPanel {
                     .addComponent(editarGerenteButton1)
                     .addComponent(adicionarGerenteButton1)
                     .addComponent(excluirGerenteButton1))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
+        gerentesLabel2.setText("Solicitações");
+
+        vendedoresList2.setModel(new MeuListModel<Solicitacao>(usuario.getSolicitacoes()));
+        gerentesScroll2.setViewportView(vendedoresList2);
+
+        adicionarGerenteButton2.setText("Aceitar");
+        adicionarGerenteButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adicionarGerenteButton2ActionPerformed(evt);
+            }
+        });
+
+        excluirGerenteButton2.setText("Recusar");
+        excluirGerenteButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excluirGerenteButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout gerentesPanel2Layout = new javax.swing.GroupLayout(gerentesPanel2);
+        gerentesPanel2.setLayout(gerentesPanel2Layout);
+        gerentesPanel2Layout.setHorizontalGroup(
+            gerentesPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerentesPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(gerentesPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gerentesScroll2)
+                    .addGroup(gerentesPanel2Layout.createSequentialGroup()
+                        .addGroup(gerentesPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(gerentesLabel2)
+                            .addGroup(gerentesPanel2Layout.createSequentialGroup()
+                                .addComponent(excluirGerenteButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(adicionarGerenteButton2)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        gerentesPanel2Layout.setVerticalGroup(
+            gerentesPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerentesPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gerentesLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gerentesScroll2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(gerentesPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(adicionarGerenteButton2)
+                    .addComponent(excluirGerenteButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        gerentesLabel3.setText("Pedidos");
+
+        vendedoresList3.setModel(new MeuListModel<Pedido>(usuario.getFranquia().getPedidos()));
+        gerentesScroll3.setViewportView(vendedoresList3);
+
+        editarGerenteButton2.setText("Editar");
+        editarGerenteButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarGerenteButton2ActionPerformed(evt);
+            }
+        });
+
+        excluirGerenteButton3.setText("Excluir");
+        excluirGerenteButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excluirGerenteButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Visualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout gerentesPanel3Layout = new javax.swing.GroupLayout(gerentesPanel3);
+        gerentesPanel3.setLayout(gerentesPanel3Layout);
+        gerentesPanel3Layout.setHorizontalGroup(
+            gerentesPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gerentesPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(gerentesPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gerentesScroll3, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gerentesLabel3)
+                    .addGroup(gerentesPanel3Layout.createSequentialGroup()
+                        .addComponent(excluirGerenteButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editarGerenteButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        gerentesPanel3Layout.setVerticalGroup(
+            gerentesPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gerentesPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gerentesLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gerentesScroll3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(gerentesPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editarGerenteButton2)
+                    .addComponent(excluirGerenteButton3)
+                    .addComponent(jButton1))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -251,7 +375,11 @@ public class TelaGerente extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(gerentesPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(gerentesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(gerentesPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(gerentesPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(120, 120, 120)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -260,15 +388,23 @@ public class TelaGerente extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(informacoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(136, 136, 136)
-                .addComponent(gerentesPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gerentesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gerentesPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(gerentesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gerentesPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addComponent(gerentesPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void editarGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarGerenteButtonActionPerformed
-        // TODO add your handling code here:
+        if(vendedoresList.getSelectedValue() == null) return;
+        
+        janela.mudarTela(new TelaEditarVendedor(sistema, usuario, janela, vendedoresList.getSelectedValue()));
     }//GEN-LAST:event_editarGerenteButtonActionPerformed
 
     private void adicionarGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarGerenteButtonActionPerformed
@@ -276,7 +412,11 @@ public class TelaGerente extends javax.swing.JPanel {
     }//GEN-LAST:event_adicionarGerenteButtonActionPerformed
 
     private void excluirGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirGerenteButtonActionPerformed
-        // TODO add your handling code here:
+        if(vendedoresList.getSelectedValue() == null) return;
+        
+        usuario.removerVendedor(vendedoresList.getSelectedValue(), sistema);
+        
+        janela.mudarTela(new TelaGerente(sistema, usuario, janela));
     }//GEN-LAST:event_excluirGerenteButtonActionPerformed
 
     private void editarGerenteButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarGerenteButton1ActionPerformed
@@ -297,26 +437,75 @@ public class TelaGerente extends javax.swing.JPanel {
         janela.mudarTela(new TelaGerente(sistema, usuario, janela));
     }//GEN-LAST:event_excluirGerenteButton1ActionPerformed
 
+    private void adicionarGerenteButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarGerenteButton2ActionPerformed
+        if(vendedoresList2.getSelectedValue() == null) return;
+        
+        usuario.aceitarSolicitacao(vendedoresList2.getSelectedValue());
+        
+        janela.mudarTela(new TelaGerente(sistema, usuario, janela));
+    }//GEN-LAST:event_adicionarGerenteButton2ActionPerformed
+
+    private void excluirGerenteButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirGerenteButton2ActionPerformed
+        if(vendedoresList2.getSelectedValue() == null) return;
+        
+        usuario.recusarSolicitacao(vendedoresList2.getSelectedValue());
+        
+        janela.mudarTela(new TelaGerente(sistema, usuario, janela));
+    }//GEN-LAST:event_excluirGerenteButton2ActionPerformed
+
+    private void editarGerenteButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarGerenteButton2ActionPerformed
+        if(vendedoresList3.getSelectedValue() == null) return;
+        
+        janela.mudarTela(new TelaEditarPedido(sistema, usuario, janela, vendedoresList3.getSelectedValue()));
+    }//GEN-LAST:event_editarGerenteButton2ActionPerformed
+
+    private void excluirGerenteButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirGerenteButton3ActionPerformed
+        if(vendedoresList3.getSelectedValue() == null) return;
+        
+        usuario.removerPedido(vendedoresList3.getSelectedValue());
+        
+        janela.mudarTela(new TelaGerente(sistema, usuario, janela));
+    }//GEN-LAST:event_excluirGerenteButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(vendedoresList3.getSelectedValue() == null) return;
+        
+        janela.mudarTela(new TelaVisualizarPedidoGerente(sistema, usuario, janela, vendedoresList3.getSelectedValue()));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adicionarGerenteButton;
     private javax.swing.JButton adicionarGerenteButton1;
+    private javax.swing.JButton adicionarGerenteButton2;
     private javax.swing.JButton editarGerenteButton;
     private javax.swing.JButton editarGerenteButton1;
+    private javax.swing.JButton editarGerenteButton2;
     private javax.swing.JButton excluirGerenteButton;
     private javax.swing.JButton excluirGerenteButton1;
+    private javax.swing.JButton excluirGerenteButton2;
+    private javax.swing.JButton excluirGerenteButton3;
     private javax.swing.JLabel gerentesLabel;
     private javax.swing.JLabel gerentesLabel1;
+    private javax.swing.JLabel gerentesLabel2;
+    private javax.swing.JLabel gerentesLabel3;
     private javax.swing.JPanel gerentesPanel;
     private javax.swing.JPanel gerentesPanel1;
+    private javax.swing.JPanel gerentesPanel2;
+    private javax.swing.JPanel gerentesPanel3;
     private javax.swing.JScrollPane gerentesScroll;
     private javax.swing.JScrollPane gerentesScroll1;
+    private javax.swing.JScrollPane gerentesScroll2;
+    private javax.swing.JScrollPane gerentesScroll3;
     private javax.swing.JPanel informacoesPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel logadoComoLabel;
     private javax.swing.JLabel nomeUsuarioLabel;
     private javax.swing.JList<Vendedor> vendedoresList;
     private javax.swing.JList<Produto> vendedoresList1;
+    private javax.swing.JList<Solicitacao> vendedoresList2;
+    private javax.swing.JList<Pedido> vendedoresList3;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,30 +8,31 @@ import com.alex.dcc025.Sistema;
 import com.alex.dcc025.franquia.Endereco.UF;
 import com.alex.dcc025.franquia.Endereco;
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.franquia.Produto;
 import com.alex.dcc025.usuario.Dono;
 import com.alex.dcc025.usuario.Gerente;
+import com.alex.dcc025.usuario.Usuario;
 
 /**
  *
  * @author SUPERVISOR
  */
-public class TelaEditarProduto extends javax.swing.JPanel {
+public class TelaEditarVendedor extends javax.swing.JPanel {
 
     private final Sistema sistema;
     private final Gerente usuario;
     private final GUI janela;
-    private final Produto produto;
+    private final Usuario aEditar;
+    
 
 
     /**
      * Creates new form TelaAdicionarFranquia
      */
-    public TelaEditarProduto(Sistema sistema, Gerente usuario, GUI janela, Produto produto) {
+    public TelaEditarVendedor(Sistema sistema, Gerente usuario, GUI janela, Usuario aEditar) {
         this.sistema = sistema;
         this.usuario = usuario;
         this.janela = janela;
-        this.produto = produto;
+        this.aEditar = aEditar;
         initComponents();
     }
 
@@ -49,34 +50,31 @@ public class TelaEditarProduto extends javax.swing.JPanel {
         nomePanel = new javax.swing.JPanel();
         nomeLabel = new javax.swing.JLabel();
         nomeField = new javax.swing.JTextField();
-        nomeField.setText(produto.getNome());
         informacoesPanel = new javax.swing.JPanel();
         informacoesLabel = new javax.swing.JLabel();
         emailPanel = new javax.swing.JPanel();
         emailLabel = new javax.swing.JLabel();
         emailField = new javax.swing.JTextField();
-        emailField.setText(produto.getDescricao());
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner1.setValue(usuario.getFranquia().getEstoque().get(produto));
-        jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField1.setText(Double.toString(produto.getPreco()));
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        cpfPanel = new javax.swing.JPanel();
+        cpfLabel = new javax.swing.JLabel();
+        cpfField = new javax.swing.JTextField();
+        senhaPanel = new javax.swing.JPanel();
+        senhaLabel = new javax.swing.JLabel();
+        senhaField = new javax.swing.JPasswordField();
+        mostrarSenhaButton = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1280, 720));
 
         adicionarFranquiaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        adicionarFranquiaLabel.setText("Editar Produto");
+        adicionarFranquiaLabel.setText("Editar Usuário");
 
         nomePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         nomeLabel.setText("Nome");
 
+        nomeField.setText(aEditar.getNome());
         nomeField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomeFieldActionPerformed(evt);
@@ -108,14 +106,20 @@ public class TelaEditarProduto extends javax.swing.JPanel {
 
         informacoesPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        informacoesLabel.setText("Informações");
+        informacoesLabel.setText("Informações Pessoais");
 
         emailPanel.setMinimumSize(new java.awt.Dimension(76, 56));
         emailPanel.setOpaque(false);
 
-        emailLabel.setText("Descrição");
+        emailLabel.setText("Email");
 
         emailField.setColumns(6);
+        emailField.setText(aEditar.getEmail());
+        emailField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout emailPanelLayout = new javax.swing.GroupLayout(emailPanel);
         emailPanel.setLayout(emailPanelLayout);
@@ -127,7 +131,7 @@ public class TelaEditarProduto extends javax.swing.JPanel {
                     .addGroup(emailPanelLayout.createSequentialGroup()
                         .addComponent(emailLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE))
+                    .addComponent(emailField))
                 .addContainerGap())
         );
         emailPanelLayout.setVerticalGroup(
@@ -140,84 +144,88 @@ public class TelaEditarProduto extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("Quantidade");
+        cpfLabel.setText("CPF");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        cpfField.setText(aEditar.getCpf());
+
+        javax.swing.GroupLayout cpfPanelLayout = new javax.swing.GroupLayout(cpfPanel);
+        cpfPanel.setLayout(cpfPanelLayout);
+        cpfPanelLayout.setHorizontalGroup(
+            cpfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cpfPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(cpfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cpfPanelLayout.createSequentialGroup()
+                        .addComponent(cpfLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(cpfField))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        cpfPanelLayout.setVerticalGroup(
+            cpfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cpfPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(cpfLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cpfField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jTextField1.setColumns(5);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        senhaLabel.setText("Senha");
+
+        senhaField.setText(aEditar.getSenha());
+        senhaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                senhaFieldActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Preço");
+        mostrarSenhaButton.setText("Mostrar senha");
+        mostrarSenhaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarSenhaButtonActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("R$");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout senhaPanelLayout = new javax.swing.GroupLayout(senhaPanel);
+        senhaPanel.setLayout(senhaPanelLayout);
+        senhaPanelLayout.setHorizontalGroup(
+            senhaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(senhaPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(senhaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(senhaField)
+                    .addGroup(senhaPanelLayout.createSequentialGroup()
+                        .addGroup(senhaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(senhaLabel)
+                            .addComponent(mostrarSenhaButton))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        senhaPanelLayout.setVerticalGroup(
+            senhaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(senhaPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(senhaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(senhaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mostrarSenhaButton))
         );
 
         javax.swing.GroupLayout informacoesPanelLayout = new javax.swing.GroupLayout(informacoesPanel);
         informacoesPanel.setLayout(informacoesPanelLayout);
         informacoesPanelLayout.setHorizontalGroup(
             informacoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(informacoesPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, informacoesPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(informacoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(emailPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(informacoesPanelLayout.createSequentialGroup()
-                        .addGroup(informacoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(informacoesLabel)
-                            .addGroup(informacoesPanelLayout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGroup(informacoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(senhaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cpfPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, informacoesPanelLayout.createSequentialGroup()
+                        .addComponent(informacoesLabel)
+                        .addGap(0, 596, Short.MAX_VALUE))
+                    .addComponent(emailPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         informacoesPanelLayout.setVerticalGroup(
@@ -228,10 +236,10 @@ public class TelaEditarProduto extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(emailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(informacoesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(cpfPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(senhaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jButton1.setText("Editar");
@@ -271,7 +279,7 @@ public class TelaEditarProduto extends javax.swing.JPanel {
                 .addComponent(nomePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(informacoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -283,11 +291,11 @@ public class TelaEditarProduto extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(282, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(adicionarFranquiaLabel))
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,7 +304,7 @@ public class TelaEditarProduto extends javax.swing.JPanel {
                 .addComponent(adicionarFranquiaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(429, Short.MAX_VALUE))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -309,18 +317,29 @@ public class TelaEditarProduto extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        usuario.alterarProduto(produto, nomeField.getText().trim(), Double.parseDouble(jTextField1.getText().trim()), emailField.getText().trim(), (Integer) jSpinner1.getValue());
+        sistema.editarUsuario(aEditar, emailField.getText().trim(), new String(senhaField.getPassword()), cpfField.getText().trim(), nomeField.getText().trim());
         
         janela.mudarTela(new TelaGerente(sistema, usuario, janela));
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void senhaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_senhaFieldActionPerformed
+
+    private void mostrarSenhaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarSenhaButtonActionPerformed
+        senhaField.setEchoChar(mostrarSenhaButton.isSelected() ? (char) 0 : (char) 8226);
+    }//GEN-LAST:event_mostrarSenhaButtonActionPerformed
+
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adicionarFranquiaLabel;
+    private javax.swing.JTextField cpfField;
+    private javax.swing.JLabel cpfLabel;
+    private javax.swing.JPanel cpfPanel;
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JPanel emailPanel;
@@ -328,16 +347,13 @@ public class TelaEditarProduto extends javax.swing.JPanel {
     private javax.swing.JPanel informacoesPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JToggleButton mostrarSenhaButton;
     private javax.swing.JTextField nomeField;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JPanel nomePanel;
     private javax.swing.JPanel principal;
+    private javax.swing.JPasswordField senhaField;
+    private javax.swing.JLabel senhaLabel;
+    private javax.swing.JPanel senhaPanel;
     // End of variables declaration//GEN-END:variables
 }

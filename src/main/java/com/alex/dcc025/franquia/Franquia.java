@@ -18,6 +18,8 @@ public class Franquia {
     private List<Vendedor> vendedores;
     private List<Pedido> pedidos;
     private Map<Produto, Integer> estoque;
+    private List<Solicitacao> solicitacoes;
+
 
     public Franquia(String nome, Endereco endereco, Gerente gerente) {
         this.id = ID.getUUID();
@@ -26,16 +28,28 @@ public class Franquia {
         this.gerente = gerente;
         this.vendedores = new ArrayList<>();
         this.pedidos = new ArrayList<>();
+        this.solicitacoes = new ArrayList<>();
         this.estoque = new HashMap<>();
-        
-        if (gerente != null) gerente.setFranquia(this);
     }
 
     public Franquia() {}
 
     public void adicionarPedido(Pedido pedido) {
         pedidos.add(pedido);
+        for (ItemPedido item : pedido.getItens()) {
+            estoque.put(item.getProduto(), estoque.get(item.getProduto()) - item.getQuantidade());
+        }
     }
+
+    public void removerPedido(Pedido pedido) {
+        pedido.getVendedor().getPedidos().remove(pedido);
+        pedidos.remove(pedido);
+        for (ItemPedido item : pedido.getItens()) {
+            estoque.put(item.getProduto(), estoque.get(item.getProduto()) + item.getQuantidade());
+        }
+    }
+
+    
 
     public boolean isEstoqueBaixo(Produto produto) {
         return estoque.get(produto) < 5;
@@ -64,19 +78,6 @@ public class Franquia {
         vendedores.add(vendedor);
     }
 
-    public void mostrarRankingVendedores() {
-        Map<Vendedor, Double> vendasPorVendedor = new HashMap<>();
-        for (Pedido p : pedidos) {
-            vendasPorVendedor.put(p.getVendedor(),
-                vendasPorVendedor.getOrDefault(p.getVendedor(), 0.0) + p.calcularValorTotal());
-        }
-
-        vendasPorVendedor.entrySet()
-            .stream()
-            .sorted(Map.Entry.<Vendedor, Double>comparingByValue().reversed())
-            .forEach(entry -> System.out.println(entry.getKey().getNome() + ": R$ " + entry.getValue()));
-    }
-
     public void cadastrarProduto(Produto produto, int quantidade) {
         estoque.put(produto, quantidade);
     }
@@ -95,7 +96,6 @@ public class Franquia {
     }
     public void setGerente(Gerente gerente) {
         this.gerente = gerente;
-        gerente.setFranquia(this);
     }
     public List<Vendedor> getVendedores() {
         return this.vendedores;
@@ -124,6 +124,25 @@ public class Franquia {
         produto.setPreco(preco);
         produto.setDescricao(descricao);
         estoque.put(produto, quantidade);
+    }
+
+    public List<Solicitacao> getSolicitacoes() {
+        return this.solicitacoes;
+    }
+
+    public void adicionarSolicitacao(Solicitacao solicitacao) {
+        solicitacoes.add(solicitacao);
+    }
+
+    public void aceitarSolicitacao(Solicitacao solicitacao) {
+        solicitacoes.remove(solicitacao);
+        solicitacao.aceitar();
+        
+    }
+
+    public void recusarSolicitacao(Solicitacao solicitacao) {
+        solicitacoes.remove(solicitacao);
+        solicitacao.recusar();
     }
 
 }

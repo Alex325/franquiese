@@ -26,8 +26,7 @@ public class Trabalho3DCC025 {
             dono.getGerente(0).cadastrarProduto("null2", 0, "null2", 0);
             dono.getGerente(0).getVendedor(0).cadastrarPedido("null", new ArrayList<>(), FormaPagamento.CREDITO, ModalidadeEntrega.ENTREGA);
             sistema.cadastrarUsuario(dono);
-            sistema.cadastrarUsuario(dono.getGerente(0));
-            sistema.cadastrarUsuario(dono.getGerente(0).getVendedor(0));
+
         }
             
         new GUI(sistema);

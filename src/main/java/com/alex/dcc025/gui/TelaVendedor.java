@@ -52,10 +52,11 @@ public class TelaVendedor extends javax.swing.JPanel {
         gerentesPanel = new javax.swing.JPanel();
         gerentesLabel = new javax.swing.JLabel();
         gerentesScroll = new javax.swing.JScrollPane();
-        vendedoresList = new javax.swing.JList<>();
+        pedidosList = new javax.swing.JList<>();
         editarGerenteButton = new javax.swing.JButton();
         adicionarGerenteButton = new javax.swing.JButton();
         excluirGerenteButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,8 +109,8 @@ public class TelaVendedor extends javax.swing.JPanel {
 
         gerentesLabel.setText("Pedidos");
 
-        vendedoresList.setModel(new MeuListModel<Pedido>(usuario.getPedidos()));
-        gerentesScroll.setViewportView(vendedoresList);
+        pedidosList.setModel(new MeuListModel<Pedido>(usuario.getPedidos()));
+        gerentesScroll.setViewportView(pedidosList);
 
         editarGerenteButton.setText("Editar");
         editarGerenteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +133,13 @@ public class TelaVendedor extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Visualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout gerentesPanelLayout = new javax.swing.GroupLayout(gerentesPanel);
         gerentesPanel.setLayout(gerentesPanelLayout);
         gerentesPanelLayout.setHorizontalGroup(
@@ -139,18 +147,17 @@ public class TelaVendedor extends javax.swing.JPanel {
             .addGroup(gerentesPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(gerentesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gerentesScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                    .addComponent(gerentesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 976, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(gerentesPanelLayout.createSequentialGroup()
-                        .addGroup(gerentesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(gerentesLabel)
-                            .addGroup(gerentesPanelLayout.createSequentialGroup()
-                                .addComponent(excluirGerenteButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(editarGerenteButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(adicionarGerenteButton)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(excluirGerenteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editarGerenteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(adicionarGerenteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
+                    .addComponent(gerentesLabel))
+                .addGap(0, 54, Short.MAX_VALUE))
         );
         gerentesPanelLayout.setVerticalGroup(
             gerentesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,12 +165,13 @@ public class TelaVendedor extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(gerentesLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gerentesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(gerentesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(gerentesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editarGerenteButton)
                     .addComponent(adicionarGerenteButton)
-                    .addComponent(excluirGerenteButton))
+                    .addComponent(excluirGerenteButton)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -172,29 +180,31 @@ public class TelaVendedor extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(124, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(1058, Short.MAX_VALUE)
-                        .addComponent(informacoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(informacoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(gerentesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(120, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(informacoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(322, 322, 322)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                 .addComponent(gerentesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void editarGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarGerenteButtonActionPerformed
-        // TODO add your handling code here:
+        if (pedidosList.getSelectedValue() == null) return;
+        if (pedidosList.getSelectedValue().getPendente()) return;
+        
+        janela.mudarTela(new TelaPedirEdicaoPedido(sistema, usuario, janela, pedidosList.getSelectedValue()));
     }//GEN-LAST:event_editarGerenteButtonActionPerformed
 
     private void adicionarGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarGerenteButtonActionPerformed
@@ -202,8 +212,18 @@ public class TelaVendedor extends javax.swing.JPanel {
     }//GEN-LAST:event_adicionarGerenteButtonActionPerformed
 
     private void excluirGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirGerenteButtonActionPerformed
-        // TODO add your handling code here:
+        if (pedidosList.getSelectedValue() == null) return;
+        if (pedidosList.getSelectedValue().getPendente()) return;
+        
+        usuario.pedirExclusao(pedidosList.getSelectedValue());
+        
     }//GEN-LAST:event_excluirGerenteButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(pedidosList.getSelectedValue() == null) return;
+        
+        janela.mudarTela(new TelaVisualizarPedidoVendedor(sistema, usuario, janela, pedidosList.getSelectedValue()));
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -214,10 +234,11 @@ public class TelaVendedor extends javax.swing.JPanel {
     private javax.swing.JPanel gerentesPanel;
     private javax.swing.JScrollPane gerentesScroll;
     private javax.swing.JPanel informacoesPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel logadoComoLabel;
     private javax.swing.JLabel nomeUsuarioLabel;
-    private javax.swing.JList<Pedido> vendedoresList;
+    private javax.swing.JList<Pedido> pedidosList;
     // End of variables declaration//GEN-END:variables
 }

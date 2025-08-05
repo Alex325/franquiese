@@ -1,16 +1,23 @@
 package com.alex.dcc025.usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.alex.dcc025.Sistema;
 import com.alex.dcc025.franquia.Franquia;
+import com.alex.dcc025.franquia.ItemPedido;
+import com.alex.dcc025.franquia.Pedido;
 import com.alex.dcc025.franquia.Produto;
+import com.alex.dcc025.franquia.Solicitacao;
+import com.alex.dcc025.franquia.Pedido.FormaPagamento;
+import com.alex.dcc025.franquia.Pedido.ModalidadeEntrega;
 
 public class Gerente extends Usuario {
     private Franquia franquia;
 
     public Gerente(String nome, String cpf, String email, String senha) {
         super(nome, cpf, email, senha);
+        
     }
 
     public Gerente() {
@@ -47,10 +54,6 @@ public class Gerente extends Usuario {
         return this.franquia.getVendedores().get(i);
     }
 
-    public void editarVendedor(Vendedor vendedor, String novoNome) {
-        // vendedor.setNome(novoNome);
-    }
-
     public void cadastrarProduto(String nome, double preco, String descricao, int quantidade) {
         this.franquia.cadastrarProduto(new Produto(nome, preco, descricao), quantidade);
     }
@@ -59,14 +62,39 @@ public class Gerente extends Usuario {
         this.franquia.alterarProduto(produto, nome, preco, descricao, quantidade);
     }
 
-    public void controlarPedidos() {
-        franquia.listarPedidos();
+    public void alterarPedido(Pedido pedido, List<ItemPedido> itens, FormaPagamento forma, ModalidadeEntrega modalidade) {
+        pedido.setItens(itens);
+        pedido.setFormaPagamento(forma);
+        pedido.setModalidadeEntrega(modalidade);
+    }
+
+    public void removerPedido(Pedido pedido) {
+        franquia.removerPedido(pedido);
+        
+    }
+
+    public List<Solicitacao> getSolicitacoes() {
+        return this.franquia.getSolicitacoes();
+    }
+
+    public void adicionarSolicitacao(Solicitacao solicitacao) {
+        this.getFranquia().adicionarSolicitacao(solicitacao);
+    }
+
+    public void aceitarSolicitacao(Solicitacao solicitacao) {
+        this.franquia.aceitarSolicitacao(solicitacao);
+        
+    }
+
+    public void recusarSolicitacao(Solicitacao solicitacao) {
+        this.franquia.recusarSolicitacao(solicitacao);
     }
 
     @Override
     public int getTipo() {
         return 1;
     }
+
 
 
 }

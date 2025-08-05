@@ -52,5 +52,21 @@ public abstract class Usuario {
         string.append(this.email);
         return string.toString();
     }
+
+    public void setEmail(String novoEmail) {
+        this.email = novoEmail;
+    }
+
+    public void setSenha(String novaSenha) {
+        this.senha = novaSenha;
+    }
     
+    public void setCpf(String novoCpf) {
+        this.cpf = novoCpf;
+    }
+
+    public void setNome(String novoNome) {
+        this.nome = novoNome;
+    }
+
 }

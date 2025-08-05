@@ -16,9 +16,12 @@ import com.alex.dcc025.franquia.Endereco.UF;
 import com.alex.dcc025.franquia.Franquia;
 import com.alex.dcc025.franquia.ItemPedido;
 import com.alex.dcc025.franquia.Pedido;
+import com.alex.dcc025.franquia.PedidoAlteracao;
+import com.alex.dcc025.franquia.PedidoExclusao;
 import com.alex.dcc025.franquia.Pedido.FormaPagamento;
 import com.alex.dcc025.franquia.Pedido.ModalidadeEntrega;
 import com.alex.dcc025.franquia.Produto;
+import com.alex.dcc025.franquia.Solicitacao;
 import com.alex.dcc025.usuario.Dono;
 import com.alex.dcc025.usuario.Gerente;
 import com.alex.dcc025.usuario.Usuario;
@@ -69,6 +72,9 @@ public class Serializador {
         kryo.register(LocalDateTime.class);
         kryo.register(ArrayList.class);
         kryo.register(HashMap.class);
+        kryo.register(Solicitacao.class);
+        kryo.register(PedidoAlteracao.class);
+        kryo.register(PedidoExclusao.class);
         
     }
 
@@ -93,7 +99,7 @@ public class Serializador {
         try (Input input = new Input(new FileInputStream(PATH_TO_ESTADO))) {
 
             usuarios = kryo.readObject(input, ArrayList.class);
-            
+
         } catch (Exception e) {
             estado.delete();
             System.out.println("Erro ao desserializar");

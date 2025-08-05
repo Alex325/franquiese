@@ -1,7 +1,6 @@
 package com.alex.dcc025.usuario;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.alex.dcc025.Sistema;
@@ -23,7 +22,16 @@ public class Dono extends Usuario {
     }
 
     public void cadastrarFranquia(String nome, Endereco endereco, Gerente gerente) {
+
+        
         Franquia f = new Franquia(nome, endereco, gerente);
+
+        if (gerente != null) {
+            if (gerente.getFranquia() != null) gerente.getFranquia().setGerente(null);
+
+            gerente.setFranquia(f);
+        }
+
         franquias.add(f);
     }
 
@@ -33,6 +41,14 @@ public class Dono extends Usuario {
 
         if (franquia.getGerente() != null) franquia.getGerente().setFranquia(null);
     }
+    
+    public void mudarGerente(Franquia franquia, Gerente gerente) {
+
+        if (franquia.getGerente() != null) franquia.getGerente().setFranquia(null);
+
+        franquia.setGerente(gerente);
+        gerente.setFranquia(franquia);
+    }
 
     public void cadastrarGerente(String nome, String cpf, String email, String senha, Sistema sistema) {
         Gerente gerente = new Gerente(nome, cpf, email, senha);
@@ -40,10 +56,12 @@ public class Dono extends Usuario {
         sistema.cadastrarUsuario(gerente);
     }
 
+
     public void removerGerente(Gerente gerente, Sistema sistema) {
         gerentes.remove(gerente);
         sistema.removerUsuario(gerente);
-        gerente.getFranquia().setGerente(null);
+        if (gerente.getFranquia() != null) gerente.getFranquia().setGerente(null);
+        gerente.setFranquia(null);
     }
 
     public Gerente getGerente(int i) {

@@ -33,21 +33,19 @@ import java.util.Map.Entry;
  *
  * @author SUPERVISOR
  */
-public class TelaAdicionarPedido extends javax.swing.JPanel {
+public class TelaVisualizarPedidoVendedor extends javax.swing.JPanel {
 
     private final Sistema sistema;
     private final Vendedor usuario;
     private final GUI janela;
+    private final Pedido pedido;
 
-    private final Map<Produto, JSpinner> quantidadesMap = new HashMap<>();    
-
-    /**
-     * Creates new form TelaAdicionarFranquia
-     */
-    public TelaAdicionarPedido(Sistema sistema, Vendedor usuario, GUI janela) {
+    
+    public TelaVisualizarPedidoVendedor(Sistema sistema, Vendedor usuario, GUI janela, Pedido pedido) {
         this.sistema = sistema;
         this.usuario = usuario;
         this.janela = janela;
+        this.pedido = pedido;
         initComponents();
     }
 
@@ -64,20 +62,22 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
         principal = new javax.swing.JPanel();
         nomePanel = new javax.swing.JPanel();
         nomeLabel = new javax.swing.JLabel();
-        nomeField = new javax.swing.JTextField();
-        adicionarButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         voltarButton = new javax.swing.JButton();
         produtosScrollPane = new javax.swing.JScrollPane();
         produtosPanel = new javax.swing.JPanel();
         formaPanel = new javax.swing.JPanel();
-        formaCombo = new javax.swing.JComboBox<>();
         formaLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         modalidadePanel = new javax.swing.JPanel();
         modalidadeLabem = new javax.swing.JLabel();
-        modalidadeCombo = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1280, 720));
 
@@ -88,11 +88,7 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
 
         nomeLabel.setText("Nome do Cliente");
 
-        nomeField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeFieldActionPerformed(evt);
-            }
-        });
+        jLabel1.setText(pedido.getCliente());
 
         javax.swing.GroupLayout nomePanelLayout = new javax.swing.GroupLayout(nomePanel);
         nomePanel.setLayout(nomePanelLayout);
@@ -101,11 +97,9 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
             .addGroup(nomePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(nomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(nomePanelLayout.createSequentialGroup()
-                        .addComponent(nomeLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(nomeField, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(nomeLabel)
+                    .addComponent(jLabel1))
+                .addContainerGap(555, Short.MAX_VALUE))
         );
         nomePanelLayout.setVerticalGroup(
             nomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,16 +107,9 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(nomeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
-
-        adicionarButton.setText("Adicionar");
-        adicionarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adicionarButtonActionPerformed(evt);
-            }
-        });
 
         voltarButton.setText("Voltar");
         voltarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -133,25 +120,18 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
 
         produtosPanel.setLayout(new java.awt.GridLayout(0, 2));
 
-        JLabel produto1 = new JLabel("Produto");
+        JLabel produto = new JLabel("Produto");
         JLabel quantidade = new JLabel("Quantidade");
 
-        produtosPanel.add(produto1);
+        produtosPanel.add(produto);
         produtosPanel.add(quantidade);
 
-        for (Entry<Produto, Integer> produto : usuario.getFranquia().getEstoque().entrySet()) {
-            JLabel label = new JLabel(produto.getKey().toString());
-            SpinnerNumberModel model = new SpinnerNumberModel(0, 0, (int)produto.getValue(), 1);
-            JSpinner spinner = new JSpinner(model);
-
-            spinner.addChangeListener(e -> {
-                jLabel2.setText(String.format(Locale.getDefault(), "R$ %,.2f", this.calcularValorTotal()));
-            });
+        for (ItemPedido item : pedido.getItens()) {
+            JLabel label = new JLabel(item.getProduto().toString());
+            JLabel label2 = new JLabel(Integer.toString(item.getQuantidade()));
 
             produtosPanel.add(label);
-            produtosPanel.add(spinner);
-
-            quantidadesMap.put(produto.getKey(), spinner);
+            produtosPanel.add(label2);
         }
 
         produtosPanel.revalidate();
@@ -159,9 +139,9 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
 
         produtosScrollPane.setViewportView(produtosPanel);
 
-        formaCombo.setModel(new MeuComboModel<FormaPagamento>(Pedido.formas, false));
-
         formaLabel.setText("Forma de Pagamento");
+
+        jLabel2.setText(pedido.getFormaPagamento().toString());
 
         javax.swing.GroupLayout formaPanelLayout = new javax.swing.GroupLayout(formaPanel);
         formaPanel.setLayout(formaPanelLayout);
@@ -169,9 +149,9 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
             formaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(formaPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(formaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(formaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(formaCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(formaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(formaLabel)
+                    .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         formaPanelLayout.setVerticalGroup(
@@ -180,13 +160,13 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(formaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(formaCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         modalidadeLabem.setText("Modalidade de Entrega");
 
-        modalidadeCombo.setModel(new MeuComboModel<ModalidadeEntrega>(Pedido.modalidades, false));
+        jLabel3.setText(pedido.getModalidadeEntrega().toString());
 
         javax.swing.GroupLayout modalidadePanelLayout = new javax.swing.GroupLayout(modalidadePanel);
         modalidadePanel.setLayout(modalidadePanelLayout);
@@ -194,9 +174,9 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
             modalidadePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modalidadePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(modalidadePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(modalidadeLabem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(modalidadeCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(modalidadePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(modalidadeLabem)
+                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         modalidadePanelLayout.setVerticalGroup(
@@ -205,11 +185,13 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(modalidadeLabem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(modalidadeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel3)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("Total:");
+        jLabel4.setText("Data e hora:");
+
+        jLabel5.setText(pedido.getDataHora());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -218,18 +200,43 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(jLabel5)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        jLabel6.setText("Total");
+
+        jLabel7.setText(String.format(Locale.getDefault(), "R$ %,.2f", pedido.calcularValorTotal()));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout principalLayout = new javax.swing.GroupLayout(principal);
@@ -240,22 +247,19 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(produtosScrollPane)
+                    .addGroup(principalLayout.createSequentialGroup()
+                        .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(formaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(modalidadePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nomePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(principalLayout.createSequentialGroup()
-                                .addComponent(formaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(143, 143, 143)
-                                .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalLayout.createSequentialGroup()
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(modalidadePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalLayout.createSequentialGroup()
-                                        .addComponent(voltarButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(adicionarButton)))))))
+                            .addComponent(voltarButton, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         principalLayout.setVerticalGroup(
@@ -267,13 +271,17 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
                 .addComponent(produtosScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(formaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(modalidadePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(adicionarButton)
-                    .addComponent(voltarButton))
+                    .addGroup(principalLayout.createSequentialGroup()
+                        .addComponent(formaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(principalLayout.createSequentialGroup()
+                        .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(modalidadePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(voltarButton)
                 .addContainerGap())
         );
 
@@ -295,62 +303,30 @@ public class TelaAdicionarPedido extends javax.swing.JPanel {
                 .addComponent(adicionarFranquiaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void nomeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeFieldActionPerformed
 
     private void voltarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarButtonActionPerformed
         janela.mudarTela(new TelaVendedor(sistema, usuario, janela));
     }//GEN-LAST:event_voltarButtonActionPerformed
 
-    private void adicionarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarButtonActionPerformed
-        List<ItemPedido> itens = new ArrayList<>();
-        
-        for (Entry<Produto, JSpinner> entry : quantidadesMap.entrySet()) {
-            
-            int quantidade = (Integer) entry.getValue().getValue();
-            
-            if (quantidade == 0) continue;
-            
-            itens.add(new ItemPedido(entry.getKey(), quantidade));
-            
-            
-        }
-        
-        usuario.cadastrarPedido(nomeField.getText().trim(), itens, (FormaPagamento) formaCombo.getSelectedItem(), (ModalidadeEntrega) modalidadeCombo.getSelectedItem());
-        
-        janela.mudarTela(new TelaVendedor(sistema, usuario, janela));
-    }//GEN-LAST:event_adicionarButtonActionPerformed
 
-    private double calcularValorTotal() {
-
-        double total = 0.0;
-
-        for (Entry<Produto, JSpinner> produto : quantidadesMap.entrySet()) {
-            total += produto.getKey().getPreco() * (int) produto.getValue().getValue();
-        }
-
-        return total;
-    }
-
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton adicionarButton;
     private javax.swing.JLabel adicionarFranquiaLabel;
-    private javax.swing.JComboBox<FormaPagamento> formaCombo;
     private javax.swing.JLabel formaLabel;
     private javax.swing.JPanel formaPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox<ModalidadeEntrega> modalidadeCombo;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel modalidadeLabem;
     private javax.swing.JPanel modalidadePanel;
-    private javax.swing.JTextField nomeField;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JPanel nomePanel;
     private javax.swing.JPanel principal;

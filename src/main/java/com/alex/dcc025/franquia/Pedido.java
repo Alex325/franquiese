@@ -1,6 +1,8 @@
 package com.alex.dcc025.franquia;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
@@ -41,6 +43,8 @@ public class Pedido {
     private FormaPagamento formaPagamento;
     private ModalidadeEntrega modalidadeEntrega;
 
+    private boolean solicitacaoPendente = false;
+
     public Pedido(Vendedor vendedor, String cliente, List<ItemPedido> itens, FormaPagamento formaPagamento, ModalidadeEntrega modalidadeEntrega) {
         this.id = ID.getUUID();
         this.vendedor = vendedor;
@@ -62,6 +66,14 @@ public class Pedido {
         return total;
     }
 
+    public boolean getPendente() {
+        return this.solicitacaoPendente;
+    }
+
+    public void setPendente(boolean pendente) {
+        this.solicitacaoPendente = pendente;
+    }
+
     public String getId() {
         return this.id;
     }
@@ -74,8 +86,8 @@ public class Pedido {
         return this.cliente;
     }
     
-    public final LocalDateTime getDataHora() {
-        return this.dataHora;
+    public final String getDataHora() {
+        return this.dataHora.format(DateTimeFormatter.ofPattern("d/MMM/uuuu HH:mm:ss"));
     }
 
     public final List<ItemPedido> getItens() {
@@ -89,10 +101,22 @@ public class Pedido {
     public final ModalidadeEntrega getModalidadeEntrega() {
         return this.modalidadeEntrega;
     }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
+    public void setModalidadeEntrega(ModalidadeEntrega modalidadeEntrega) {
+        this.modalidadeEntrega = modalidadeEntrega;
+    }
     
     @Override
     public String toString() {
-        return "Pedido de " + cliente + " - " + String.format(Locale.getDefault(), "R$ %,.2f", calcularValorTotal());
+        return "Pedido de " + cliente + " - " + String.format(Locale.getDefault(), "R$ %,.2f", calcularValorTotal()) + " - " + this.getDataHora();
     }
 
 }

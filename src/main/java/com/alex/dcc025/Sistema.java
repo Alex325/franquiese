@@ -37,6 +37,17 @@ public class Sistema {
         usuarios.remove(usuario);
     }
 
+    public List<Usuario> getUsuarios() {
+        return this.usuarios;
+    }
+
+    public void editarUsuario(Usuario usuario, String novoEmail, String novaSenha, String novoCpf, String novoNome) {
+        usuario.setEmail(novoEmail);
+        usuario.setSenha(novaSenha);
+        usuario.setCpf(novoCpf);
+        usuario.setNome(novoNome);
+    }
+
     private void salvar() {
         Serializador.saveState(usuarios);
     }

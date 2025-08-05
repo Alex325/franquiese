@@ -47,7 +47,7 @@
     <Component class="javax.swing.JLabel" name="adicionarFranquiaLabel">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Visualizar Franquia"/>
+        <Property name="text" type="java.lang.String" value="Mudar Gerente"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="principal">

@@ -132,7 +132,7 @@ public class TelaVisualizarFranquia extends javax.swing.JPanel {
 
         jLabel8.setText("Gerente");
 
-        jLabel12.setText(franquia.getGerente().toString());
+        jLabel12.setText(franquia.getGerente() != null ? franquia.getGerente().toString() : "Sem gerente");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -515,7 +515,7 @@ public class TelaVisualizarFranquia extends javax.swing.JPanel {
         principalLayout.setVerticalGroup(
             principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(nomePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enderecoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -529,7 +529,8 @@ public class TelaVisualizarFranquia extends javax.swing.JPanel {
                 .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(porVolume)
-                    .addComponent(porValor)))
+                    .addComponent(porValor))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -537,11 +538,11 @@ public class TelaVisualizarFranquia extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(272, Short.MAX_VALUE)
+                .addContainerGap(432, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(adicionarFranquiaLabel)
                     .addComponent(principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addContainerGap(431, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -550,7 +551,7 @@ public class TelaVisualizarFranquia extends javax.swing.JPanel {
                 .addComponent(adicionarFranquiaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(principal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -561,7 +562,7 @@ public class TelaVisualizarFranquia extends javax.swing.JPanel {
     private void porValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_porValorActionPerformed
         ranking.removeAll();
         
-        for (Vendedor vendedor : franquia.getVendedores().stream().sorted((v1, v2) -> (int)(v1.getValor() - v2.getValor())).toList()) {
+        for (Vendedor vendedor : franquia.getVendedores().stream().sorted((v1, v2) -> (int)(v2.getValor() - v1.getValor())).toList()) {
             ranking.add(new JLabel(String.format(Locale.getDefault(), "%s - Vendas realizadas: %d - Valor total: R$ %,.2f", vendedor.toString(), vendedor.getVolume(), vendedor.getValor())));
         }
         
@@ -572,7 +573,7 @@ public class TelaVisualizarFranquia extends javax.swing.JPanel {
     private void porVolumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_porVolumeActionPerformed
         ranking.removeAll();
         
-        for (Vendedor vendedor : franquia.getVendedores().stream().sorted((v1, v2) -> v1.getVolume() - v2.getVolume()).toList()) {
+        for (Vendedor vendedor : franquia.getVendedores().stream().sorted((v1, v2) -> v2.getVolume() - v1.getVolume()).toList()) {
             ranking.add(new JLabel(String.format(Locale.getDefault(), "%s - Vendas realizadas: %d - Valor total: R$ %,.2f", vendedor.toString(), vendedor.getVolume(), vendedor.getValor())));
         }
         

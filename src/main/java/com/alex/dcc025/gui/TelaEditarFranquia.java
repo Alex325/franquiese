@@ -84,7 +84,7 @@ public class TelaEditarFranquia extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1600, 900));
 
         adicionarFranquiaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        adicionarFranquiaLabel.setText("Visualizar Franquia");
+        adicionarFranquiaLabel.setText("Mudar Gerente");
 
         principal.setPreferredSize(new java.awt.Dimension(574, 415));
 
@@ -456,7 +456,7 @@ public class TelaEditarFranquia extends javax.swing.JPanel {
             return;
         }
         
-        franquia.setGerente((Gerente) jComboBox1.getSelectedItem());
+        usuario.mudarGerente(franquia, (Gerente) jComboBox1.getSelectedItem());
         
         janela.mudarTela(new TelaDono(sistema, usuario, janela));
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -6,6 +6,8 @@ import java.util.List;
 import com.alex.dcc025.franquia.Franquia;
 import com.alex.dcc025.franquia.ItemPedido;
 import com.alex.dcc025.franquia.Pedido;
+import com.alex.dcc025.franquia.PedidoAlteracao;
+import com.alex.dcc025.franquia.PedidoExclusao;
 import com.alex.dcc025.franquia.Pedido.FormaPagamento;
 import com.alex.dcc025.franquia.Pedido.ModalidadeEntrega;
 
@@ -41,8 +43,12 @@ public class Vendedor extends Usuario {
         return pedidos.size();
     }
 
-    public void solicitarAlteracaoPedido(Pedido pedido) {
-        // franquia.analisarSolicitacaoAlteracao(pedido);
+    public void pedirAlteracao(Pedido pedido, List<ItemPedido> itens, FormaPagamento forma, ModalidadeEntrega modalidade) {
+        franquia.getGerente().adicionarSolicitacao(new PedidoAlteracao(pedido, itens, forma, modalidade));
+    }
+
+    public void pedirExclusao(Pedido pedido) {
+        franquia.getGerente().adicionarSolicitacao(new PedidoExclusao(pedido));
     }
 
     @Override
