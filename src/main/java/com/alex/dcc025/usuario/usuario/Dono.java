@@ -58,6 +58,9 @@ public class Dono extends Usuario {
         Usuario.validarUsuario(nome, cpf, email, senha);
 
         Gerente gerente = new Gerente(nome, cpf, email, senha);
+
+        sistema.checkConflito(gerente, email);
+
         gerentes.add(gerente);
         sistema.cadastrarUsuario(gerente);
     }

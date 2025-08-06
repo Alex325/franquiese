@@ -3,6 +3,7 @@ package com.alex.dcc025;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alex.dcc025.exception.LoginDuplicadoException;
 import com.alex.dcc025.usuario.Usuario;
 import com.alex.dcc025.usuario.usuario.Vendedor;
 import com.alex.dcc025.util.Serializador;
@@ -46,6 +47,8 @@ public class Sistema {
 
         Usuario.validarUsuario(novoNome, novoCpf, novoEmail, novaSenha);
 
+        checkConflito(usuario, novoEmail);
+
         usuario.setEmail(novoEmail);
         usuario.setSenha(novaSenha);
         usuario.setCpf(novoCpf);
@@ -62,6 +65,10 @@ public class Sistema {
 
     public void removerUsuarios(List<Usuario> usuarios) {
         usuarios.removeAll(usuarios);
+    }
+
+    public void checkConflito(Usuario usuario, String email) throws Exception {
+        if (usuarios.stream().anyMatch(u -> u.getEmail().equals(email) && u != usuario)) throw new LoginDuplicadoException("Email deve ser único.");
     }
 
 }

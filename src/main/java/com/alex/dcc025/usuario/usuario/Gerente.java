@@ -36,6 +36,9 @@ public class Gerente extends Usuario {
         Usuario.validarUsuario(nome, cpf, email, senha);
 
         Vendedor vendedor = new Vendedor(nome, cpf, email, senha, this.franquia);
+
+        sistema.checkConflito(vendedor, email);
+
         franquia.cadastrarVendedor(vendedor);
         sistema.cadastrarUsuario(vendedor);
     }

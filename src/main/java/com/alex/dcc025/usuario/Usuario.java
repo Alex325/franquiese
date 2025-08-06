@@ -81,6 +81,7 @@ public abstract class Usuario {
         if (!Validador.validarCpf(cpf)) throw new CpfInvalidoException("CPF deve ser válido");
         if (!Validador.validarEmail(email)) throw new EmailInvalidoException("Email deve ser válido");
         if (!Validador.validarSenha(senha)) throw new SenhaInvalidaException("Senha não deve ser vazia");
+        
 
 
     }
