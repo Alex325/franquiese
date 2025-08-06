@@ -9,11 +9,13 @@ import javax.swing.ListModel;
 
 import com.alex.dcc025.Sistema;
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.franquia.Pedido;
-import com.alex.dcc025.usuario.Dono;
-import com.alex.dcc025.usuario.Gerente;
-import com.alex.dcc025.usuario.Vendedor;
+import com.alex.dcc025.franquia.pedido.Pedido;
 import com.alex.dcc025.usuario.Usuario;
+import com.alex.dcc025.usuario.usuario.Dono;
+import com.alex.dcc025.usuario.usuario.Gerente;
+import com.alex.dcc025.usuario.usuario.Vendedor;
+
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -202,7 +204,10 @@ public class TelaVendedor extends javax.swing.JPanel {
 
     private void editarGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarGerenteButtonActionPerformed
         if (pedidosList.getSelectedValue() == null) return;
-        if (pedidosList.getSelectedValue().getPendente()) return;
+        if (pedidosList.getSelectedValue().getPendente()) {
+            JOptionPane.showMessageDialog(null, "Edição já solicitada.");
+            return;
+        }
         
         janela.mudarTela(new TelaPedirEdicaoPedido(sistema, usuario, janela, pedidosList.getSelectedValue()));
     }//GEN-LAST:event_editarGerenteButtonActionPerformed
@@ -213,9 +218,17 @@ public class TelaVendedor extends javax.swing.JPanel {
 
     private void excluirGerenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirGerenteButtonActionPerformed
         if (pedidosList.getSelectedValue() == null) return;
-        if (pedidosList.getSelectedValue().getPendente()) return;
+        if (pedidosList.getSelectedValue().getPendente()) {
+            
+            JOptionPane.showMessageDialog(null, "Exclusão já solicitada.");            
+            return;
+        }
+        
+        
         
         usuario.pedirExclusao(pedidosList.getSelectedValue());
+        
+        JOptionPane.showMessageDialog(null, "Exclusão solicitada. Aguarde decisão do gerente.");
         
     }//GEN-LAST:event_excluirGerenteButtonActionPerformed
 

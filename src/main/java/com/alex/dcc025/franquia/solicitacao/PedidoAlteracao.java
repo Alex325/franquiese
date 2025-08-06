@@ -1,9 +1,11 @@
-package com.alex.dcc025.franquia;
+package com.alex.dcc025.franquia.solicitacao;
 
 import java.util.List;
 
-import com.alex.dcc025.franquia.Pedido.FormaPagamento;
-import com.alex.dcc025.franquia.Pedido.ModalidadeEntrega;
+import com.alex.dcc025.franquia.pedido.ItemPedido;
+import com.alex.dcc025.franquia.pedido.Pedido;
+import com.alex.dcc025.franquia.pedido.Pedido.FormaPagamento;
+import com.alex.dcc025.franquia.pedido.Pedido.ModalidadeEntrega;
 
 public class PedidoAlteracao implements Solicitacao {
 

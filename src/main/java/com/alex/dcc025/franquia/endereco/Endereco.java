@@ -1,4 +1,4 @@
-package com.alex.dcc025.franquia;
+package com.alex.dcc025.franquia.endereco;
 
 import java.util.ArrayList;
 import java.util.List;

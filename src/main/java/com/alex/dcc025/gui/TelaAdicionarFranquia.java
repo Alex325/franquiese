@@ -4,12 +4,14 @@
  */
 package com.alex.dcc025.gui;
 
+import javax.swing.JOptionPane;
+
 import com.alex.dcc025.Sistema;
-import com.alex.dcc025.franquia.Endereco.UF;
-import com.alex.dcc025.franquia.Endereco;
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.usuario.Dono;
-import com.alex.dcc025.usuario.Gerente;
+import com.alex.dcc025.franquia.endereco.Endereco;
+import com.alex.dcc025.franquia.endereco.Endereco.UF;
+import com.alex.dcc025.usuario.usuario.Dono;
+import com.alex.dcc025.usuario.usuario.Gerente;
 
 /**
  *
@@ -251,6 +253,12 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
 
         bairroLabel.setText("Bairro");
 
+        bairroField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bairroFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout enderecoBairroPanelLayout = new javax.swing.GroupLayout(enderecoBairroPanel);
         enderecoBairroPanel.setLayout(enderecoBairroPanelLayout);
         enderecoBairroPanelLayout.setHorizontalGroup(
@@ -454,14 +462,23 @@ public class TelaAdicionarFranquia extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Endereco endereco = new Endereco(cepField.getText().trim(), logradouroField.getText().trim(), numeroField.getText().trim(), complementoField.getText().trim(), municipioField.getText().trim(), bairroField.getText().trim(), (UF) ufCombo.getSelectedItem());
+        Endereco endereco = new Endereco(cepField.getText().trim(), logradouroField.getText().trim(), numeroField.getText().trim(), complementoField.getText().trim(), bairroField.getText().trim(), municipioField.getText().trim(), (UF) ufCombo.getSelectedItem());
         
         Gerente gerente = (Gerente) gerenteCombo.getSelectedItem();
         
-        usuario.cadastrarFranquia(nomeField.getText(), endereco, gerente);
+        try {
+            usuario.cadastrarFranquia(nomeField.getText(), endereco, gerente);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return;
+        }
         
         janela.mudarTela(new TelaDono(sistema, usuario, janela));
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void bairroFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bairroFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bairroFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

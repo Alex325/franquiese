@@ -1,4 +1,4 @@
-package com.alex.dcc025.franquia;
+package com.alex.dcc025.franquia.pedido;
 
 public class ItemPedido {
 

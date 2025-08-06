@@ -1,13 +1,17 @@
-package com.alex.dcc025.franquia;
+package com.alex.dcc025.franquia.pedido;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.alex.dcc025.usuario.Vendedor;
+import com.alex.dcc025.exception.CampoTextoInvalidoException;
+import com.alex.dcc025.exception.PedidoVazioException;
+import com.alex.dcc025.usuario.usuario.Vendedor;
 import com.alex.dcc025.util.ID;
+import com.alex.dcc025.util.Validador;
 
 public class Pedido {
 
@@ -91,7 +95,7 @@ public class Pedido {
     }
 
     public final List<ItemPedido> getItens() {
-        return this.itens;
+        return List.copyOf(this.itens);
     }
 
     public final FormaPagamento getFormaPagamento() {
@@ -117,6 +121,15 @@ public class Pedido {
     @Override
     public String toString() {
         return "Pedido de " + cliente + " - " + String.format(Locale.getDefault(), "R$ %,.2f", calcularValorTotal()) + " - " + this.getDataHora();
+    }
+
+    public static void validarPedido(String cliente, List<ItemPedido> itens) throws Exception {
+        if (!Validador.validarCampoTexto(cliente)) throw new CampoTextoInvalidoException("Cliente deve ser composto de caracteres");
+        if (itens.size() == 0) throw new PedidoVazioException("Pedido não pode ser vazio");
+    }
+
+    public static void validarPedido(List<ItemPedido> itens) throws Exception {
+        if (itens.size() == 0) throw new PedidoVazioException("Pedido não pode ser vazio");
     }
 
 }

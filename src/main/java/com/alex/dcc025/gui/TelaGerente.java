@@ -5,19 +5,23 @@
 package com.alex.dcc025.gui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
 
 import com.alex.dcc025.Sistema;
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.franquia.Pedido;
-import com.alex.dcc025.franquia.Produto;
-import com.alex.dcc025.franquia.Solicitacao;
-import com.alex.dcc025.usuario.Dono;
-import com.alex.dcc025.usuario.Gerente;
-import com.alex.dcc025.usuario.Vendedor;
+import com.alex.dcc025.franquia.pedido.Pedido;
+import com.alex.dcc025.franquia.pedido.Produto;
+import com.alex.dcc025.franquia.solicitacao.Solicitacao;
 import com.alex.dcc025.usuario.Usuario;
+import com.alex.dcc025.usuario.usuario.Dono;
+import com.alex.dcc025.usuario.usuario.Gerente;
+import com.alex.dcc025.usuario.usuario.Vendedor;
+
+import java.util.Locale;
+import javax.swing.JLabel;
 
 /**
  *
@@ -37,6 +41,10 @@ public class TelaGerente extends javax.swing.JPanel {
         this.usuario = usuario;
         this.janela = janela;
         initComponents();
+
+
+        
+
     }
 
     /**
@@ -50,6 +58,7 @@ public class TelaGerente extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         informacoesPanel = new javax.swing.JPanel();
         logadoComoLabel = new javax.swing.JLabel();
         nomeUsuarioLabel = new javax.swing.JLabel();
@@ -80,6 +89,17 @@ public class TelaGerente extends javax.swing.JPanel {
         editarGerenteButton2 = new javax.swing.JButton();
         excluirGerenteButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        rankingPanel = new javax.swing.JPanel();
+        rankingScrollPane = new javax.swing.JScrollPane();
+        ranking = new javax.swing.JPanel();
+        rankingLabel = new javax.swing.JLabel();
+        porVolume = new javax.swing.JRadioButton();
+        porValor = new javax.swing.JRadioButton();
+        jPanel4 = new javax.swing.JPanel();
+        rankingLabel1 = new javax.swing.JLabel();
+        rankingScrollPane1 = new javax.swing.JScrollPane();
+        ranking1 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,6 +122,9 @@ public class TelaGerente extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        buttonGroup1.add(porVolume);
+        buttonGroup1.add(porValor);
 
         setPreferredSize(new java.awt.Dimension(1280, 720));
 
@@ -361,6 +384,104 @@ public class TelaGerente extends javax.swing.JPanel {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
+        rankingPanel.setPreferredSize(new java.awt.Dimension(308, 238));
+
+        ranking.setLayout(new java.awt.GridLayout(0, 1));
+        rankingScrollPane.setViewportView(ranking);
+
+        rankingLabel.setText("Ranking de Vendedores");
+
+        porVolume.setText("Por volume");
+        porVolume.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                porVolumeActionPerformed(evt);
+            }
+        });
+
+        porValor.setText("Por valor");
+        porValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                porValorActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout rankingPanelLayout = new javax.swing.GroupLayout(rankingPanel);
+        rankingPanel.setLayout(rankingPanelLayout);
+        rankingPanelLayout.setHorizontalGroup(
+            rankingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rankingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(rankingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rankingLabel)
+                    .addComponent(rankingScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(rankingPanelLayout.createSequentialGroup()
+                        .addComponent(porVolume)
+                        .addGap(5, 5, 5)
+                        .addComponent(porValor)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        rankingPanelLayout.setVerticalGroup(
+            rankingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rankingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rankingLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rankingScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(rankingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(porValor)
+                    .addComponent(porVolume))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rankingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rankingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        rankingLabel1.setText("Itens em baixa");
+
+        ranking1.setLayout(new java.awt.GridLayout(0, 1));
+        rankingScrollPane1.setViewportView(ranking1);
+        List<Produto> produtosBaixa = usuario.getFranquia().getEstoque().keySet().stream().filter(p -> usuario.getFranquia().isEstoqueBaixo(p)).toList();
+
+        for (Produto produto : produtosBaixa) {
+            ranking1.add(new JLabel(produto.toString()));
+        }
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rankingLabel1)
+                    .addComponent(rankingScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rankingLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rankingScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -368,14 +489,18 @@ public class TelaGerente extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(1058, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(informacoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(gerentesPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(gerentesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(gerentesPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(gerentesPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -385,19 +510,26 @@ public class TelaGerente extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(informacoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(informacoesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(136, 136, 136)
                         .addComponent(gerentesPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(gerentesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(170, 170, 170)
                         .addComponent(gerentesPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)
-                        .addComponent(gerentesPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(148, Short.MAX_VALUE))
+                        .addGap(43, 43, 43)
+                        .addComponent(gerentesPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -473,11 +605,34 @@ public class TelaGerente extends javax.swing.JPanel {
         janela.mudarTela(new TelaVisualizarPedidoGerente(sistema, usuario, janela, vendedoresList3.getSelectedValue()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void porVolumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_porVolumeActionPerformed
+        ranking.removeAll();
+
+        for (Vendedor vendedor : usuario.getFranquia().getVendedores().stream().sorted((v1, v2) -> v2.getVolume() - v1.getVolume()).toList()) {
+            ranking.add(new JLabel(String.format(Locale.getDefault(), "%s - Vendas realizadas: %d - Valor total: R$ %,.2f", vendedor.toString(), vendedor.getVolume(), vendedor.getValor())));
+        }
+
+        ranking.revalidate();
+        ranking.repaint();
+    }//GEN-LAST:event_porVolumeActionPerformed
+
+    private void porValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_porValorActionPerformed
+        ranking.removeAll();
+
+        for (Vendedor vendedor : usuario.getFranquia().getVendedores().stream().sorted((v1, v2) -> (int)(v2.getValor() - v1.getValor())).toList()) {
+            ranking.add(new JLabel(String.format(Locale.getDefault(), "%s - Vendas realizadas: %d - Valor total: R$ %,.2f", vendedor.toString(), vendedor.getVolume(), vendedor.getValor())));
+        }
+
+        ranking.revalidate();
+        ranking.repaint();
+    }//GEN-LAST:event_porValorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adicionarGerenteButton;
     private javax.swing.JButton adicionarGerenteButton1;
     private javax.swing.JButton adicionarGerenteButton2;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton editarGerenteButton;
     private javax.swing.JButton editarGerenteButton1;
     private javax.swing.JButton editarGerenteButton2;
@@ -501,8 +656,19 @@ public class TelaGerente extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel logadoComoLabel;
     private javax.swing.JLabel nomeUsuarioLabel;
+    private javax.swing.JRadioButton porValor;
+    private javax.swing.JRadioButton porVolume;
+    private javax.swing.JPanel ranking;
+    private javax.swing.JPanel ranking1;
+    private javax.swing.JLabel rankingLabel;
+    private javax.swing.JLabel rankingLabel1;
+    private javax.swing.JPanel rankingPanel;
+    private javax.swing.JScrollPane rankingScrollPane;
+    private javax.swing.JScrollPane rankingScrollPane1;
     private javax.swing.JList<Vendedor> vendedoresList;
     private javax.swing.JList<Produto> vendedoresList1;
     private javax.swing.JList<Solicitacao> vendedoresList2;

@@ -4,13 +4,15 @@
  */
 package com.alex.dcc025.gui;
 
+import javax.swing.JOptionPane;
+
 import com.alex.dcc025.Sistema;
-import com.alex.dcc025.franquia.Endereco.UF;
-import com.alex.dcc025.franquia.Endereco;
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.usuario.Dono;
-import com.alex.dcc025.usuario.Gerente;
+import com.alex.dcc025.franquia.endereco.Endereco;
+import com.alex.dcc025.franquia.endereco.Endereco.UF;
 import com.alex.dcc025.usuario.Usuario;
+import com.alex.dcc025.usuario.usuario.Dono;
+import com.alex.dcc025.usuario.usuario.Gerente;
 
 /**
  *
@@ -317,7 +319,12 @@ public class TelaEditarUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        sistema.editarUsuario(aEditar, emailField.getText().trim(), new String(senhaField.getPassword()), cpfField.getText().trim(), nomeField.getText().trim());
+        try {
+            sistema.editarUsuario(aEditar, emailField.getText().trim(), new String(senhaField.getPassword()), cpfField.getText().trim(), nomeField.getText().trim());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return;
+        }
         
         janela.mudarTela(new TelaDono(sistema, usuario, janela));
     }//GEN-LAST:event_jButton1ActionPerformed

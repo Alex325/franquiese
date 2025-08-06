@@ -13,17 +13,18 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 import com.alex.dcc025.Sistema;
-import com.alex.dcc025.franquia.Endereco.UF;
-import com.alex.dcc025.franquia.Endereco;
+import com.alex.dcc025.franquia.pedido.ItemPedido;
+import com.alex.dcc025.franquia.pedido.Pedido;
+import com.alex.dcc025.franquia.pedido.Produto;
+import com.alex.dcc025.franquia.pedido.Pedido.FormaPagamento;
+import com.alex.dcc025.franquia.pedido.Pedido.ModalidadeEntrega;
+import com.alex.dcc025.usuario.usuario.Dono;
+import com.alex.dcc025.usuario.usuario.Gerente;
+import com.alex.dcc025.usuario.usuario.Vendedor;
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.franquia.ItemPedido;
-import com.alex.dcc025.franquia.Pedido;
-import com.alex.dcc025.franquia.Pedido.FormaPagamento;
-import com.alex.dcc025.franquia.Pedido.ModalidadeEntrega;
-import com.alex.dcc025.franquia.Produto;
-import com.alex.dcc025.usuario.Dono;
-import com.alex.dcc025.usuario.Gerente;
-import com.alex.dcc025.usuario.Vendedor;
+import com.alex.dcc025.franquia.endereco.Endereco;
+import com.alex.dcc025.franquia.endereco.Endereco.UF;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;

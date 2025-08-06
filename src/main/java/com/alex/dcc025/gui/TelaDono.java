@@ -9,10 +9,11 @@ import javax.swing.ListModel;
 
 import com.alex.dcc025.Sistema;
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.usuario.Dono;
-import com.alex.dcc025.usuario.Gerente;
-import com.alex.dcc025.usuario.Vendedor;
 import com.alex.dcc025.usuario.Usuario;
+import com.alex.dcc025.usuario.usuario.Dono;
+import com.alex.dcc025.usuario.usuario.Gerente;
+import com.alex.dcc025.usuario.usuario.Vendedor;
+
 import javax.swing.JOptionPane;
 
 /**

@@ -1,9 +1,10 @@
 package com.alex.dcc025;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.alex.dcc025.usuario.Usuario;
-import com.alex.dcc025.usuario.Vendedor;
+import com.alex.dcc025.usuario.usuario.Vendedor;
 import com.alex.dcc025.util.Serializador;
 
 public class Sistema {
@@ -38,10 +39,13 @@ public class Sistema {
     }
 
     public List<Usuario> getUsuarios() {
-        return this.usuarios;
+        return List.copyOf(this.usuarios);
     }
 
-    public void editarUsuario(Usuario usuario, String novoEmail, String novaSenha, String novoCpf, String novoNome) {
+    public void editarUsuario(Usuario usuario, String novoEmail, String novaSenha, String novoCpf, String novoNome) throws Exception {
+
+        Usuario.validarUsuario(novoNome, novoCpf, novoEmail, novaSenha);
+
         usuario.setEmail(novoEmail);
         usuario.setSenha(novaSenha);
         usuario.setCpf(novoCpf);

@@ -1,4 +1,6 @@
-package com.alex.dcc025.franquia;
+package com.alex.dcc025.franquia.solicitacao;
+
+import com.alex.dcc025.franquia.pedido.Pedido;
 
 public class PedidoExclusao implements Solicitacao {
 
@@ -11,8 +13,7 @@ public class PedidoExclusao implements Solicitacao {
     public PedidoExclusao() {}
  
     public void aceitar() {
-        this.pedido.getVendedor().getPedidos().remove(this.pedido);
-        this.pedido.getVendedor().getFranquia().getPedidos().remove(this.pedido);
+        this.pedido.getVendedor().getFranquia().removerPedido(this.pedido);
         this.pedido.setPendente(false);
     }
 

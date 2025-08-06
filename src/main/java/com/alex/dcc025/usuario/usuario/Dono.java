@@ -1,11 +1,13 @@
-package com.alex.dcc025.usuario;
+package com.alex.dcc025.usuario.usuario;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.alex.dcc025.Sistema;
-import com.alex.dcc025.franquia.Endereco;
 import com.alex.dcc025.franquia.Franquia;
+import com.alex.dcc025.franquia.endereco.Endereco;
+import com.alex.dcc025.usuario.Usuario;
+
 import java.util.ArrayList;
 
 public class Dono extends Usuario {
@@ -21,9 +23,10 @@ public class Dono extends Usuario {
     public Dono() {
     }
 
-    public void cadastrarFranquia(String nome, Endereco endereco, Gerente gerente) {
+    public void cadastrarFranquia(String nome, Endereco endereco, Gerente gerente) throws Exception {
 
-        
+        Franquia.validarFranquia(nome, endereco);
+
         Franquia f = new Franquia(nome, endereco, gerente);
 
         if (gerente != null) {
@@ -50,7 +53,10 @@ public class Dono extends Usuario {
         gerente.setFranquia(franquia);
     }
 
-    public void cadastrarGerente(String nome, String cpf, String email, String senha, Sistema sistema) {
+    public void cadastrarGerente(String nome, String cpf, String email, String senha, Sistema sistema) throws Exception {
+
+        Usuario.validarUsuario(nome, cpf, email, senha);
+
         Gerente gerente = new Gerente(nome, cpf, email, senha);
         gerentes.add(gerente);
         sistema.cadastrarUsuario(gerente);
@@ -73,10 +79,10 @@ public class Dono extends Usuario {
     }
 
     public final List<Franquia> getFranquias() {
-        return this.franquias;
+        return List.copyOf(this.franquias);
     }
     public final List<Gerente> getGerentes() {
-        return this.gerentes;
+        return List.copyOf(this.gerentes);
     }
     
     @Override

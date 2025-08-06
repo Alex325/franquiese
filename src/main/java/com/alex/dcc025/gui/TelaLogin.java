@@ -5,10 +5,11 @@
 package com.alex.dcc025.gui;
 
 import com.alex.dcc025.Sistema;
-import com.alex.dcc025.usuario.Dono;
-import com.alex.dcc025.usuario.Gerente;
 import com.alex.dcc025.usuario.Usuario;
-import com.alex.dcc025.usuario.Vendedor;
+import com.alex.dcc025.usuario.usuario.Dono;
+import com.alex.dcc025.usuario.usuario.Gerente;
+import com.alex.dcc025.usuario.usuario.Vendedor;
+
 import javax.swing.JOptionPane;
 
 /**

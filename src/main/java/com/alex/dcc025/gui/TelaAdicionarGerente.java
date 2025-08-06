@@ -4,12 +4,14 @@
  */
 package com.alex.dcc025.gui;
 
+import javax.swing.JOptionPane;
+
 import com.alex.dcc025.Sistema;
-import com.alex.dcc025.franquia.Endereco.UF;
-import com.alex.dcc025.franquia.Endereco;
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.usuario.Dono;
-import com.alex.dcc025.usuario.Gerente;
+import com.alex.dcc025.franquia.endereco.Endereco;
+import com.alex.dcc025.franquia.endereco.Endereco.UF;
+import com.alex.dcc025.usuario.usuario.Dono;
+import com.alex.dcc025.usuario.usuario.Gerente;
 
 /**
  *
@@ -305,7 +307,12 @@ public class TelaAdicionarGerente extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        usuario.cadastrarGerente(nomeField.getText().trim(), cpfField.getText().trim(), emailField.getText().trim(), new String(senhaField.getPassword()), this.sistema);
+        try {
+            usuario.cadastrarGerente(nomeField.getText().trim(), cpfField.getText().trim(), emailField.getText().trim(), new String(senhaField.getPassword()), this.sistema);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return;
+        }
         
         janela.mudarTela(new TelaDono(sistema, usuario, janela));
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -1,16 +1,16 @@
-package com.alex.dcc025.usuario;
+package com.alex.dcc025.usuario.usuario;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.alex.dcc025.Sistema;
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.franquia.ItemPedido;
-import com.alex.dcc025.franquia.Pedido;
-import com.alex.dcc025.franquia.Produto;
-import com.alex.dcc025.franquia.Solicitacao;
-import com.alex.dcc025.franquia.Pedido.FormaPagamento;
-import com.alex.dcc025.franquia.Pedido.ModalidadeEntrega;
+import com.alex.dcc025.franquia.pedido.ItemPedido;
+import com.alex.dcc025.franquia.pedido.Pedido;
+import com.alex.dcc025.franquia.pedido.Produto;
+import com.alex.dcc025.franquia.pedido.Pedido.FormaPagamento;
+import com.alex.dcc025.franquia.pedido.Pedido.ModalidadeEntrega;
+import com.alex.dcc025.franquia.solicitacao.Solicitacao;
+import com.alex.dcc025.usuario.Usuario;
 
 public class Gerente extends Usuario {
     private Franquia franquia;
@@ -31,7 +31,10 @@ public class Gerente extends Usuario {
         return this.franquia;
     }
 
-    public void cadastrarVendedor(String nome, String cpf, String email, String senha, Sistema sistema) {
+    public void cadastrarVendedor(String nome, String cpf, String email, String senha, Sistema sistema) throws Exception {
+
+        Usuario.validarUsuario(nome, cpf, email, senha);
+
         Vendedor vendedor = new Vendedor(nome, cpf, email, senha, this.franquia);
         franquia.cadastrarVendedor(vendedor);
         sistema.cadastrarUsuario(vendedor);
@@ -54,15 +57,24 @@ public class Gerente extends Usuario {
         return this.franquia.getVendedores().get(i);
     }
 
-    public void cadastrarProduto(String nome, double preco, String descricao, int quantidade) {
+    public void cadastrarProduto(String nome, double preco, String descricao, int quantidade) throws Exception {
+
+        Produto.validarProduto(nome, descricao, preco);
+
         this.franquia.cadastrarProduto(new Produto(nome, preco, descricao), quantidade);
     }
 
-    public void alterarProduto(Produto produto, String nome, double preco, String descricao, int quantidade) {
+    public void alterarProduto(Produto produto, String nome, double preco, String descricao, int quantidade) throws Exception {
+        
+        Produto.validarProduto(nome, descricao, preco);
+
         this.franquia.alterarProduto(produto, nome, preco, descricao, quantidade);
     }
 
-    public void alterarPedido(Pedido pedido, List<ItemPedido> itens, FormaPagamento forma, ModalidadeEntrega modalidade) {
+    public void alterarPedido(Pedido pedido, List<ItemPedido> itens, FormaPagamento forma, ModalidadeEntrega modalidade) throws Exception {
+
+        Pedido.validarPedido(itens);
+
         pedido.setItens(itens);
         pedido.setFormaPagamento(forma);
         pedido.setModalidadeEntrega(modalidade);

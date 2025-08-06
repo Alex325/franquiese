@@ -1,15 +1,16 @@
-package com.alex.dcc025.usuario;
+package com.alex.dcc025.usuario.usuario;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.franquia.ItemPedido;
-import com.alex.dcc025.franquia.Pedido;
-import com.alex.dcc025.franquia.PedidoAlteracao;
-import com.alex.dcc025.franquia.PedidoExclusao;
-import com.alex.dcc025.franquia.Pedido.FormaPagamento;
-import com.alex.dcc025.franquia.Pedido.ModalidadeEntrega;
+import com.alex.dcc025.franquia.pedido.ItemPedido;
+import com.alex.dcc025.franquia.pedido.Pedido;
+import com.alex.dcc025.franquia.pedido.Pedido.FormaPagamento;
+import com.alex.dcc025.franquia.pedido.Pedido.ModalidadeEntrega;
+import com.alex.dcc025.franquia.solicitacao.PedidoAlteracao;
+import com.alex.dcc025.franquia.solicitacao.PedidoExclusao;
+import com.alex.dcc025.usuario.Usuario;
 
 public class Vendedor extends Usuario {
     private Franquia franquia;
@@ -21,17 +22,23 @@ public class Vendedor extends Usuario {
         this.pedidos = new ArrayList<>();
     }
 
-    public Vendedor() {
-    }
+    public Vendedor() {}
 
-    public void cadastrarPedido(String cliente, List<ItemPedido> itens, FormaPagamento formaPagamento, ModalidadeEntrega modalidadeEntrega) {
+    public void cadastrarPedido(String cliente, List<ItemPedido> itens, FormaPagamento formaPagamento, ModalidadeEntrega modalidadeEntrega) throws Exception {
+
+        Pedido.validarPedido(cliente, itens);
+
         Pedido pedido = new Pedido(this, cliente, itens, formaPagamento, modalidadeEntrega);
         pedidos.add(pedido);
         franquia.adicionarPedido(pedido);
     }
 
+    public void removerPedido(Pedido pedido) {
+        pedidos.remove(pedido);
+    }
+
     public List<Pedido> getPedidos() {
-        return pedidos;
+        return List.copyOf(pedidos);
     }
 
     public double getValor() {
@@ -43,12 +50,18 @@ public class Vendedor extends Usuario {
         return pedidos.size();
     }
 
-    public void pedirAlteracao(Pedido pedido, List<ItemPedido> itens, FormaPagamento forma, ModalidadeEntrega modalidade) {
+    public void pedirAlteracao(Pedido pedido, List<ItemPedido> itens, FormaPagamento forma, ModalidadeEntrega modalidade) throws Exception {
+
+        Pedido.validarPedido(itens);
+
         franquia.getGerente().adicionarSolicitacao(new PedidoAlteracao(pedido, itens, forma, modalidade));
+
+        pedido.setPendente(true);
     }
 
     public void pedirExclusao(Pedido pedido) {
         franquia.getGerente().adicionarSolicitacao(new PedidoExclusao(pedido));
+        pedido.setPendente(true);
     }
 
     @Override

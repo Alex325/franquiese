@@ -7,12 +7,13 @@ package com.alex.dcc025.gui;
 import java.util.Locale;
 
 import com.alex.dcc025.Sistema;
-import com.alex.dcc025.franquia.Endereco.UF;
-import com.alex.dcc025.franquia.Endereco;
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.usuario.Dono;
-import com.alex.dcc025.usuario.Gerente;
-import com.alex.dcc025.usuario.Vendedor;
+import com.alex.dcc025.franquia.endereco.Endereco;
+import com.alex.dcc025.franquia.endereco.Endereco.UF;
+import com.alex.dcc025.usuario.usuario.Dono;
+import com.alex.dcc025.usuario.usuario.Gerente;
+import com.alex.dcc025.usuario.usuario.Vendedor;
+
 import javax.swing.JLabel;
 
 /**

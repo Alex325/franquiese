@@ -9,21 +9,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 import com.alex.dcc025.Sistema;
-import com.alex.dcc025.franquia.Endereco.UF;
-import com.alex.dcc025.franquia.Endereco;
+import com.alex.dcc025.franquia.pedido.ItemPedido;
+import com.alex.dcc025.franquia.pedido.Pedido;
+import com.alex.dcc025.franquia.pedido.Produto;
+import com.alex.dcc025.franquia.pedido.Pedido.FormaPagamento;
+import com.alex.dcc025.franquia.pedido.Pedido.ModalidadeEntrega;
+import com.alex.dcc025.usuario.usuario.Dono;
+import com.alex.dcc025.usuario.usuario.Gerente;
+import com.alex.dcc025.usuario.usuario.Vendedor;
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.franquia.ItemPedido;
-import com.alex.dcc025.franquia.Pedido;
-import com.alex.dcc025.franquia.Pedido.FormaPagamento;
-import com.alex.dcc025.franquia.Pedido.ModalidadeEntrega;
-import com.alex.dcc025.franquia.Produto;
-import com.alex.dcc025.usuario.Dono;
-import com.alex.dcc025.usuario.Gerente;
-import com.alex.dcc025.usuario.Vendedor;
+import com.alex.dcc025.franquia.endereco.Endereco;
+import com.alex.dcc025.franquia.endereco.Endereco.UF;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -150,7 +152,7 @@ public class TelaPedirEdicaoPedido extends javax.swing.JPanel {
             produtosPanel.add(label);
             produtosPanel.add(spinner);
 
-            quantidadesMap.put(item.getProduto(), spinner);
+            quantidadesMap.put(produto.getKey(), spinner);
         }
 
         produtosPanel.revalidate();
@@ -317,7 +319,14 @@ public class TelaPedirEdicaoPedido extends javax.swing.JPanel {
             
         }
         
-        usuario.pedirAlteracao(pedido, itens, (FormaPagamento) formaCombo.getSelectedItem(), (ModalidadeEntrega) modalidadeCombo.getSelectedItem());
+        try {
+            usuario.pedirAlteracao(pedido, itens, (FormaPagamento) formaCombo.getSelectedItem(), (ModalidadeEntrega) modalidadeCombo.getSelectedItem());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(null, "Edição solicitada. Aguarde decisão do gerente.");
         
         janela.mudarTela(new TelaVendedor(sistema, usuario, janela));
     }//GEN-LAST:event_adicionarButtonActionPerformed

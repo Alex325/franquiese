@@ -5,9 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.alex.dcc025.usuario.Gerente;
-import com.alex.dcc025.usuario.Vendedor;
+import com.alex.dcc025.exception.CampoTextoInvalidoException;
+import com.alex.dcc025.franquia.endereco.Endereco;
+import com.alex.dcc025.franquia.pedido.ItemPedido;
+import com.alex.dcc025.franquia.pedido.Pedido;
+import com.alex.dcc025.franquia.pedido.Produto;
+import com.alex.dcc025.franquia.solicitacao.Solicitacao;
+import com.alex.dcc025.usuario.usuario.Gerente;
+import com.alex.dcc025.usuario.usuario.Vendedor;
 import com.alex.dcc025.util.ID;
+import com.alex.dcc025.util.Validador;
 
 public class Franquia {
 
@@ -42,14 +49,13 @@ public class Franquia {
     }
 
     public void removerPedido(Pedido pedido) {
-        pedido.getVendedor().getPedidos().remove(pedido);
         pedidos.remove(pedido);
+        pedido.getVendedor().removerPedido(pedido);
+
         for (ItemPedido item : pedido.getItens()) {
             estoque.put(item.getProduto(), estoque.get(item.getProduto()) + item.getQuantidade());
         }
     }
-
-    
 
     public boolean isEstoqueBaixo(Produto produto) {
         return estoque.get(produto) < 5;
@@ -98,13 +104,13 @@ public class Franquia {
         this.gerente = gerente;
     }
     public List<Vendedor> getVendedores() {
-        return this.vendedores;
+        return List.copyOf(this.vendedores);
     }
     public List<Pedido> getPedidos() {
-        return this.pedidos;
+        return List.copyOf(this.pedidos);
     }
     public Map<Produto, Integer> getEstoque() {
-        return this.estoque;
+        return Map.copyOf(this.estoque);
     }
 
     public void removerVendedor(Vendedor vendedor) {
@@ -119,7 +125,10 @@ public class Franquia {
         return string.toString();
     }
 
-    public void alterarProduto(Produto produto, String nome, double preco, String descricao, int quantidade) {
+    public void alterarProduto(Produto produto, String nome, double preco, String descricao, int quantidade) throws Exception {
+
+        Produto.validarProduto(nome, descricao, preco);
+
         produto.setNome(nome);
         produto.setPreco(preco);
         produto.setDescricao(descricao);
@@ -127,7 +136,7 @@ public class Franquia {
     }
 
     public List<Solicitacao> getSolicitacoes() {
-        return this.solicitacoes;
+        return List.copyOf(this.solicitacoes);
     }
 
     public void adicionarSolicitacao(Solicitacao solicitacao) {
@@ -143,6 +152,11 @@ public class Franquia {
     public void recusarSolicitacao(Solicitacao solicitacao) {
         solicitacoes.remove(solicitacao);
         solicitacao.recusar();
+    }
+
+    public static void validarFranquia(String nome, Endereco endereco) throws Exception {
+        if (!Validador.validarCampoTexto(nome)) throw new CampoTextoInvalidoException("Nome deve ser composto de caracteres.");
+        Validador.validarEndereco(endereco);
     }
 
 }

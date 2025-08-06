@@ -1,0 +1,9 @@
+package com.alex.dcc025.exception;
+
+public class NumeroInvalidoException extends Exception {
+
+    public NumeroInvalidoException(String message) {
+        super(message);
+    }
+
+}

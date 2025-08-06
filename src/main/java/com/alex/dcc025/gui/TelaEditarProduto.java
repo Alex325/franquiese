@@ -4,13 +4,15 @@
  */
 package com.alex.dcc025.gui;
 
+import javax.swing.JOptionPane;
+
 import com.alex.dcc025.Sistema;
-import com.alex.dcc025.franquia.Endereco.UF;
-import com.alex.dcc025.franquia.Endereco;
+import com.alex.dcc025.franquia.pedido.Produto;
+import com.alex.dcc025.usuario.usuario.Dono;
+import com.alex.dcc025.usuario.usuario.Gerente;
 import com.alex.dcc025.franquia.Franquia;
-import com.alex.dcc025.franquia.Produto;
-import com.alex.dcc025.usuario.Dono;
-import com.alex.dcc025.usuario.Gerente;
+import com.alex.dcc025.franquia.endereco.Endereco;
+import com.alex.dcc025.franquia.endereco.Endereco.UF;
 
 /**
  *
@@ -309,7 +311,15 @@ public class TelaEditarProduto extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        usuario.alterarProduto(produto, nomeField.getText().trim(), Double.parseDouble(jTextField1.getText().trim()), emailField.getText().trim(), (Integer) jSpinner1.getValue());
+        try {
+            usuario.alterarProduto(produto, nomeField.getText().trim(), Double.parseDouble(jTextField1.getText().trim()), emailField.getText().trim(), (Integer) jSpinner1.getValue());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Preço deve ter formato de double");
+            return;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return;
+        }
         
         janela.mudarTela(new TelaGerente(sistema, usuario, janela));
     }//GEN-LAST:event_jButton1ActionPerformed
