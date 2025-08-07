@@ -1,11 +1,13 @@
+/*
+ * Alex Sandro de Macedo Pinto
+ * 202465551C
+ */
 package com.alex.dcc025;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.alex.dcc025.exception.LoginDuplicadoException;
 import com.alex.dcc025.usuario.Usuario;
-import com.alex.dcc025.usuario.usuario.Vendedor;
 import com.alex.dcc025.util.Serializador;
 
 public class Sistema {

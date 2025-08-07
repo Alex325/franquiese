@@ -1,3 +1,7 @@
+/*
+ * Alex Sandro de Macedo Pinto
+ * 202465551C
+ */
 package com.alex.dcc025.gui;
 
 import java.awt.Dimension;
@@ -8,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.alex.dcc025.Sistema;
+import com.alex.dcc025.gui.tela.login.TelaLogin;
 
 public class GUI {
     private final JFrame janela;

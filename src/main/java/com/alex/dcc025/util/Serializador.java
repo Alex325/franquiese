@@ -1,3 +1,7 @@
+/*
+ * Alex Sandro de Macedo Pinto
+ * 202465551C
+ */
 package com.alex.dcc025.util;
 
 import java.io.File;
@@ -89,7 +93,8 @@ public class Serializador {
             e.printStackTrace();
         }
     }
-
+    
+    @SuppressWarnings("unchecked")
     public static List<Usuario> loadState() {
 
         List<Usuario> usuarios = new ArrayList<>();

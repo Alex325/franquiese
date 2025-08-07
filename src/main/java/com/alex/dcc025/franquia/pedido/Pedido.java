@@ -1,9 +1,11 @@
+/*
+ * Alex Sandro de Macedo Pinto
+ * 202465551C
+ */
 package com.alex.dcc025.franquia.pedido;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -15,7 +17,7 @@ import com.alex.dcc025.util.Validador;
 
 public class Pedido {
 
-    public enum FormaPagamento {
+    public static enum FormaPagamento {
         CREDITO,
         DEBITO;
 
@@ -24,7 +26,7 @@ public class Pedido {
         }
     }
 
-    public enum ModalidadeEntrega {
+    public static enum ModalidadeEntrega {
         ENTREGA,
         BUSCA_NA_LOJA;
 

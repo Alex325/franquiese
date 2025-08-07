@@ -1,6 +1,11 @@
+/*
+ * Alex Sandro de Macedo Pinto
+ * 202465551C
+ */
 package com.alex.dcc025.franquia.pedido;
 
 import com.alex.dcc025.exception.CampoTextoInvalidoException;
+import com.alex.dcc025.exception.NumeroInvalidoException;
 import com.alex.dcc025.util.ID;
 import com.alex.dcc025.util.Validador;
 
@@ -56,7 +61,7 @@ public class Produto {
     public static void validarProduto(String nome, String descricao, double preco) throws Exception {
         if (!Validador.validarCampoTexto(nome)) throw new CampoTextoInvalidoException("Nome deve ser composto de caracteres.");
         if (!Validador.validarCampoTexto(descricao)) throw new CampoTextoInvalidoException("Campo descrição deve ser composto de caracteres.");
-        if (preco < 0.0) throw new CampoTextoInvalidoException("Preço deve ser maior ou igual a 0.");
+        if (preco < 0.0) throw new NumeroInvalidoException("Preço deve ser maior ou igual a 0.");
     }
 }
 

@@ -1,3 +1,7 @@
+/*
+ * Alex Sandro de Macedo Pinto
+ * 202465551C
+ */
 package com.alex.dcc025.franquia.solicitacao;
 
 import java.util.List;
@@ -26,6 +30,26 @@ public class PedidoAlteracao implements Solicitacao {
 
     @Override
     public void aceitar() {
+
+        for (ItemPedido item : pedido.getItens()) {
+
+            int adicionar;
+
+            if (itens.stream().noneMatch(i -> i.getProduto() == item.getProduto())) {
+                adicionar = item.getQuantidade();
+            }
+            else {
+                adicionar = item.getQuantidade() - itens.stream().filter(i -> i.getProduto() == item.getProduto()).toList().get(0).getQuantidade();
+            }
+
+            try {
+                pedido.getVendedor().getFranquia().alterarProduto(item.getProduto(), item.getProduto().getNome(), item.getProduto().getPreco(), item.getProduto().getDescricao(), pedido.getVendedor().getFranquia().getEstoque().get(item.getProduto()) + adicionar);
+            } catch (Exception e) {
+                // isso não deve acontecer
+            }
+            
+        }
+
         this.pedido.setFormaPagamento(forma);
         this.pedido.setItens(itens);
         this.pedido.setModalidadeEntrega(modalidade);

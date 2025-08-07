@@ -1,3 +1,7 @@
+/*
+ * Alex Sandro de Macedo Pinto
+ * 202465551C
+ */
 package com.alex.dcc025.usuario.usuario;
 
 import java.util.List;
@@ -49,7 +53,7 @@ public class Gerente extends Usuario {
     }
 
     public void removerProduto(Produto produto) {
-        franquia.getEstoque().remove(produto);
+        franquia.removerProduto(produto);
     }
 
     public List<Vendedor> getVendedores() {
@@ -77,6 +81,21 @@ public class Gerente extends Usuario {
     public void alterarPedido(Pedido pedido, List<ItemPedido> itens, FormaPagamento forma, ModalidadeEntrega modalidade) throws Exception {
 
         Pedido.validarPedido(itens);
+
+        for (ItemPedido item : pedido.getItens()) {
+
+            int adicionar;
+
+            if (itens.stream().noneMatch(i -> i.getProduto() == item.getProduto())) {
+                adicionar = item.getQuantidade();
+            }
+            else {
+                adicionar = item.getQuantidade() - itens.stream().filter(i -> i.getProduto() == item.getProduto()).toList().get(0).getQuantidade();
+            }
+
+            pedido.getVendedor().getFranquia().alterarProduto(item.getProduto(), item.getProduto().getNome(), item.getProduto().getPreco(), item.getProduto().getDescricao(), franquia.getEstoque().get(item.getProduto()) + adicionar);
+            
+        }
 
         pedido.setItens(itens);
         pedido.setFormaPagamento(forma);

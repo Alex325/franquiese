@@ -1,3 +1,7 @@
+/*
+ * Alex Sandro de Macedo Pinto
+ * 202465551C
+ */
 package com.alex.dcc025.franquia.solicitacao;
 
 import com.alex.dcc025.franquia.pedido.Pedido;

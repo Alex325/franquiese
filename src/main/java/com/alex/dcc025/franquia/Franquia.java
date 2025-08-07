@@ -1,3 +1,7 @@
+/*
+ * Alex Sandro de Macedo Pinto
+ * 202465551C
+ */
 package com.alex.dcc025.franquia;
 
 import java.util.ArrayList;
@@ -59,12 +63,6 @@ public class Franquia {
 
     public boolean isEstoqueBaixo(Produto produto) {
         return estoque.get(produto) < 5;
-    }
-
-    public void listarPedidos() {
-        for (Pedido p : pedidos) {
-            System.out.println(p);
-        }
     }
 
     public double ticketMedio() {
@@ -157,6 +155,10 @@ public class Franquia {
     public static void validarFranquia(String nome, Endereco endereco) throws Exception {
         if (!Validador.validarCampoTexto(nome)) throw new CampoTextoInvalidoException("Nome deve ser composto de caracteres.");
         Validador.validarEndereco(endereco);
+    }
+
+    public void removerProduto(Produto produto) {
+        estoque.remove(produto);
     }
 
 }
